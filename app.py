@@ -8,13 +8,17 @@ app.config['DEBUG'] = True
 def view_homepage():
     return render_template("index.jinja")
 
-@app.route("/products")
+@app.route("/reservation")
 def view_products_page():
-    return render_template("products.jinja")
+    return render_template("reservation.jinja")
 
 @app.route("/contacts")
 def view_contact_page():
     return render_template("contacts.jinja")
+
+@app.route("/account")
+def view_account_page():
+    return render_template("account.jinja")
 
 # First endpoint
 @app.route("/welcome")
