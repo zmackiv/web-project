@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Pilotní web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/struktura.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/text_zaklad.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/barvy.css") }}" type="text/css">
+  </head>
+  <body>
+      {% include "__nav.jinja" %}
+
+
+      {%  block content %}
+      default
+      {% endblock %}
+
+      {% include "__footer.jinja" %}
+  </body>
+</html>

@@ -1,0 +1,15 @@
+/* CSS Document */
+body{background:rgb(230,230,250)}
+main,header {background:white;}
+
+footer {background: #d8bfd8;}
+
+nav{background:rgb(102,0,153);color:white;}
+nav a{color: white; text-decoration: none;}
+nav ul li ul {background:rgb(102,0,153);transition:display 0.8s;}
+nav li{transition:background 0.8s;}
+nav li:hover{background:rgb(147,112,219)}
+
+
+.bloky div {background:rgb(216,191,216)}
+

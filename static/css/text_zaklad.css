@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Signika:wght@300;600&display=swap');
+body{font-size:1.6vw; font-family: 'Signika', cursive;}
+
+p{text-align:justify; margin:0 0 1vw 0}
+
+aside h3 {font-size:1em}
+aside p {font-size:0.6em}
+
+.nalevo {float:left;width:50%; margin:0 1vw 1vw 0;}
+
+.bloky div {font-size:0.8em}
+
+
+/*forms*/
+form div {padding:0.5vw}
+label {display:inline-block;width:8vw;text-align:right;font-size:1em}
+input[type="text"]{background:#f3f3f3;margin-left:1.5vw;border:0;border-bottom:2px solid rgb(102,0,153);height:1.5vw;font-size:1em}
+input[type="text"]:focus { background:#ffffff;border:2px solid rgb(102,0,153);}
+
+input[type="radio"]{margin-left:1.5vw;height:1.5vw;width:1.5vw;display:inline-block; accent-color:solid rgb(102,0,153) }
+input[type="radio"]:focus + span {border-bottom:2px solid rgb(102,0,153);}
+textarea{border:2px solid rgb(102,0,153);{background:#f3f3f3;}

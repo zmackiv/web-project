@@ -1,0 +1,72 @@
+{%  extends "__main.jinja" %}
+
+{% block content %}
+    <main>
+      <section>
+        <h2>Nadpis první sekce</h2>
+        <p>Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus. Ipsum at ridiculus Fusce lobortis amet ornare nonummy Ut eleifend. Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus. Ipsum at ridiculus Fusce lobortis amet ornare nonummy Ut eleifend.</p>
+        <p>Porttitor Sed eleifend nulla risus Curabitur non pretium non amet semper. Orci Praesent In eget Ut odio parturient sed Morbi ut urna. Id libero malesuada neque malesuada nonummy et.Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus. Ipsum at ridiculus Fusce lobortis amet ornare nonummy Ut eleifend. Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus. Ipsum at ridiculus Fusce lobortis amet ornare nonummy Ut eleifend.</p>
+        <p>Laoreet ac leo molestie enim pede sed risus sapien condimentum tincidunt. Cursus tristique convallis habitasse Aenean hac tellus quis tincidunt feugiat Curabitur. </p>
+      </section>
+
+      <section>
+        <h2>Nadpis druhé sekce</h2>
+        <aside>
+          <h3>info</h3>
+          <p>Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus.</p>
+        </aside>
+        <img src="{{ url_for("static", filename="img/img_01.png") }}" class="nalevo">
+        <p>Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus. Ipsum at ridiculus Fusce lobortis amet ornare nonummy Ut eleifend.</p>
+        <p>Porttitor Sed eleifend nulla risus Curabitur non pretium non amet semper. Orci Praesent In eget Ut odio parturient sed Morbi ut urna. Id libero malesuada neque malesuada nonummy et.</p>
+        <p>Laoreet ac leo molestie enim pede sed risus sapien condimentum tincidunt. Cursus tristique convallis habitasse Aenean hac tellus quis tincidunt feugiat Curabitur. </p>
+      </section>
+
+      <section>
+        <h2>Nadpis třetí sekce</h2>
+        <div class="dva_sloupce">
+          <p>Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus. Ipsum at ridiculus Fusce lobortis amet ornare nonummy Ut eleifend.</p>
+          <p>Porttitor Sed eleifend nulla risus Curabitur non pretium non amet semper. Orci Praesent In eget Ut odio parturient sed Morbi ut urna. Id libero malesuada neque malesuada nonummy et.</p>
+          <p>Laoreet ac leo molestie enim pede sed risus sapien condimentum tincidunt. Cursus tristique convallis habitasse Aenean hac tellus quis tincidunt feugiat Curabitur. </p>
+          <p>Porttitor Sed eleifend nulla risus Curabitur non pretium non amet semper. Orci Praesent In eget Ut odio parturient sed Morbi ut urna. Id libero malesuada neque malesuada nonummy et.</p>
+          <p>Laoreet ac leo molestie enim pede sed risus sapien condimentum tincidunt. Cursus tristique convallis habitasse Aenean hac tellus quis tincidunt feugiat Curabitur. </p>
+        </div>
+      </section>
+
+      <section class="bloky">
+        <div>
+          <p>Lorem ipsum dolor sit amet consectetuer sit neque augue Curabitur Vivamus. Ipsum at ridiculus Fusce lobortis amet ornare nonummy Ut eleifend.</p>
+        </div>
+        <div>
+          <p>Porttitor Sed eleifend nulla risus Curabitur non pretium non amet semper. Orci Praesent In eget Ut odio parturient sed Morbi ut urna. Id libero malesuada neque malesuada nonummy et.</p>
+        </div>
+        <div>
+          <p>Laoreet ac leo molestie enim pede sed risus sapien condimentum tincidunt. Cursus tristique convallis habitasse Aenean hac tellus quis tincidunt feugiat Curabitur. </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Formulare</h2>
+        <form>
+          <div>
+            <label>Jméno:</label>
+            <input type="text" size=30 name="jmeno" />
+          </div>
+          <div>
+            <label>Příjmení:</label>
+            <input type="text" size=30 name="prijmeni" />
+          </div>
+          <div>
+            <label>Pohlaví:</label>
+            <input type="radio" name="sex" value="muž">
+            <span>Muž</span>
+            <input type="radio" name="sex" value="žena">
+            <span>Žena</span>
+          </div>
+          <div>
+            <label>Popis</label>
+            <textarea name="charakteristika"></textarea>
+          </div>
+        </form>
+      </section>
+    </main>
+{% endblock %}
