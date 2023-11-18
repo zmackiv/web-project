@@ -80,6 +80,78 @@ aside {
 	padding: 1vw
 }
 
+/* --- FORMS --- */
+
+.form-control {
+    margin-bottom: 1em;
+}
+
+.form-control > label:first-child {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+label {
+    margin-right: 1em;
+}
+
+input, textarea {
+    border-radius: 10px;
+    border: 2px solid #78bc1b;
+    padding: 0.5em 1em;
+}
+
+input[type="radio"] {
+    margin-right: 0.5em;
+}
+
+input[type="text"] {
+    background: white;
+	border-color: #78bc1b;
+}
+
+input[type="submit"] {
+    background: #78bc1b;
+    color: white;
+    font-weight: bold;
+}
+
+
+.side-by-side {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+}
+
+.side-by-side div {
+    width: 25%;
+    display: block;
+    background: #e5f7cb;
+    padding: 1em 1.5em;
+    margin-bottom: 1em;
+}
+
+.side-by-side h3 {
+    margin-bottom: 0.5rem;
+}
+
+.side-by-side p {
+    font-size: 0.9em;
+}
+
+@media screen and (max-width: 992px) {
+    .side-by-side div {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .side-by-side div {
+        width: 100%;
+    }
+}
 
 footer {
 	height: 20vw;
