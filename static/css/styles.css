@@ -82,6 +82,41 @@ input[type="submit"] {
     font-weight: bold;
 }
 
+.side-by-side {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+}
+
+.side-by-side div {
+    width: 25%;
+    display: block;
+    background: #e5f7cb;
+    padding: 1em 1.5em;
+    margin-bottom: 1em;
+}
+
+.side-by-side h3 {
+    margin-bottom: 0.5rem;
+}
+
+.side-by-side p {
+    font-size: 0.9em;
+}
+
+@media screen and (max-width: 992px) {
+    .side-by-side div {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .side-by-side div {
+        width: 100%;
+    }
+}
+
 /* --- NAVIGATION --- */
 
 nav {
@@ -217,13 +252,16 @@ footer {
     color: white;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center; /* Horizontální zarovnání na střed */
+    align-items: center; /* Vertikální zarovnání na střed */
     padding: 2em 2em 5em 2em;
 }
 
 footer div {
     margin-right: 2em;
     margin-bottom: 2em;
-    width: 30%;
+    width: 33%;
+    text-align: center; /* Vystředění textu uvnitř divu */
 }
 
 @media screen and (max-width: 576px) {
