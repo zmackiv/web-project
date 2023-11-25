@@ -1,6 +1,7 @@
 /* CSS Document */
 body {
 	margin: 0;
+	padding: 0;
 }
 
 main,
@@ -71,19 +72,35 @@ aside {
 }
 
 .bloky {
-	display: flex;
+    display: flex;
+    justify-content: space-between;
 }
 
-.bloky div {
-	width: 100%;
-	margin: 2vw;
-	padding: 1vw
+.side-by-side form {
+    width: 80%;
+}
+
+.form-control {
+    margin-bottom: 1em;
+    margin-left: 0.5em;
+    width: 90%
+}
+
+@media (max-width: 768px) {
+    .bloky {
+        flex-direction: column;
+    }
+
+    .bloky form {
+        width: 100%;
+    }
 }
 
 /* --- FORMS --- */
 
 .form-control {
     margin-bottom: 1em;
+    width: 80%
 }
 
 .form-control > label:first-child {
@@ -118,7 +135,7 @@ input[type="submit"] {
 }
 
 
-.side-by-side {
+.container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -126,14 +143,20 @@ input[type="submit"] {
 }
 
 .side-by-side div {
-    width: 25%;
+    width: 40%;
     display: block;
     background: #e5f7cb;
     padding: 1em 1.5em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
-.side-by-side h3 {
+@media (max-width: 600px) {
+    .side-by-side div {
+        width: 100%;
+    }
+}
+
+.side-by-side h2 {
     margin-bottom: 0.5rem;
 }
 

@@ -14,9 +14,9 @@ aside p {font-size:0.6em}
 /*forms*/
 form div {padding:0.5vw}
 label {display:inline-block;width:8vw;text-align:right;font-size:1em}
-input[type="text"]{background: white;margin-left:1.5vw;border:0;border-bottom:2px solid #58920a;height:1.5vw;font-size:1em}
+input[type="text"]{background: white;margin-left:1.5vw; margin-right:1.5vw;border:0;border-bottom:2px solid #58920a;height:1.5vw; width: 99%;font-size:1em}
 input[type="text"]:focus { background:#ffffff;border:2px solid rgb(102,0,153);}
 
-input[type="radio"]{margin-left:1.5vw;height:1.5vw;width:1.5vw;display:inline-block; accent-color: #58920a}
+input[type="radio"]{margin-left:1.5vw;margin-right:1.5vw; height:1.5vw;width:1.5vw;display:inline-block; accent-color: #58920a}
 input[type="radio"]:focus + span {border-bottom:2px solid #58920a;}
 textarea{border:2px solid rgb(102,0,153); background:#f3f3f3;}

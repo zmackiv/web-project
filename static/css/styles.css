@@ -90,7 +90,7 @@ input[type="submit"] {
 }
 
 .side-by-side div {
-    width: 25%;
+    width: 50%;
     display: block;
     background: #e5f7cb;
     padding: 1em 1.5em;
@@ -218,7 +218,7 @@ main h2 {
 }
 
 .side-by-side div {
-    width: 25%;
+    width: 40%;
     display: block;
     background: #e5f7cb;
     padding: 1em 1.5em;
