@@ -50,3 +50,5 @@ Thumbs.db
 
 # venv files and default output directiory
 venv/
+
+database/db.sqlite
