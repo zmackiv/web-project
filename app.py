@@ -1,8 +1,10 @@
 from flask import Flask, render_template
+from database import database
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-
+app.config.from_object('config')
+database.init_app(app)
 
 @app.route("/")
 def view_homepage():
@@ -25,5 +27,5 @@ def view_account_page():
 def view_welcome_page():
     return render_template("welcome_page.jinja", name="Mr Yoda")
 
-
-app.run('0.0.0.0', port=5000)
+if __name__ == '__main__':
+    app.run('0.0.0.0', port=5000)
