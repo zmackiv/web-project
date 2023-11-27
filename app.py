@@ -11,7 +11,7 @@ def view_homepage():
     return render_template("index.jinja")
 
 @app.route("/reservation")
-def view_products_page():
+def view_reservation_page():
     return render_template("reservation.jinja")
 
 @app.route("/contacts")

@@ -239,6 +239,22 @@ main h2 {
     font-size: 0.9em;
 }
 
+
+
+button {
+    background: #78bc1b;
+    color: white;
+    font-weight: bold;
+    border: none; /* Odstranění výchozího ohraničení */
+    border-radius: 10px; /* Zaoblené okraje */
+    padding: 10px 20px; /* Vlastní vzdálenost okraje tlačítka */
+    cursor: pointer; /* Změna kurzoru na ukazatel ruky */
+    justify-content: center;
+}
+
+
+
+
 @media screen and (max-width: 992px) {
     .side-by-side div {
         width: 40%;
