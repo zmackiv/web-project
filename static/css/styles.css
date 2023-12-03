@@ -59,12 +59,19 @@ img.nalevo {
 
 .form-control {
     margin-bottom: 1em;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-control > label:first-child {
     font-weight: bold;
     display: block;
     margin-bottom: 0.5em;
+}
+
+.form-control input,
+.form-control textarea{
+    width: 280%;
 }
 
 label {
@@ -75,6 +82,7 @@ input, textarea {
     border-radius: 10px;
     border: 2px solid #78bc1b;
     padding: 0.5em 1em;
+    width: 95%;
 }
 
 input[type="radio"] {
@@ -95,7 +103,7 @@ input[type="submit"] {
 }
 
 .side-by-side div {
-    width: 50%;
+    width: 90%;
     display: block;
     background: #e5f7cb;
     padding: 1em 1.5em;
@@ -113,13 +121,26 @@ input[type="submit"] {
 
 @media screen and (max-width: 992px) {
     .side-by-side div {
-        width: 40%;
+        width: 80%;
+    }
+    .form-control input,
+    .form-control textarea{
+        width: 280%;
+        margin-right: 5em;
+
     }
 }
 
 @media screen and (max-width: 576px) {
     .side-by-side div {
-        width: 100%;
+        width: 95%;
+        flex-direction: row;
+    }
+    .form-control input,
+    .form-control textarea{
+        width: 85%;
+        margin-right: 5em;
+
     }
 }
 
