@@ -55,6 +55,19 @@ img.nalevo {
     }
 }
 
+#logout-button{
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: #707070;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+#logout-button:hover {
+    background-color: #888888;
+}
+
 /* --- FORMS --- */
 
 .form-control {
@@ -127,7 +140,13 @@ input[type="submit"] {
     .form-control textarea{
         width: 280%;
         margin-right: 5em;
+    }
 
+    #logout-button{
+        position: absolute;
+        top: 37em;
+        right: 1em;
+        padding: 1em;
     }
 }
 
@@ -141,6 +160,12 @@ input[type="submit"] {
         width: 85%;
         margin-right: 5em;
 
+    }
+    #logout-button{
+        position: absolute;
+        top: 32em;
+        right: 1em;
+        padding: 1em;
     }
 }
 
@@ -268,7 +293,7 @@ button {
     font-weight: bold;
     border: none; /* Odstranění výchozího ohraničení */
     border-radius: 10px; /* Zaoblené okraje */
-    padding: 10px 20px; /* Vlastní vzdálenost okraje tlačítka */
+    padding: 10px 50px; /* Vlastní vzdálenost okraje tlačítka */
     cursor: pointer; /* Změna kurzoru na ukazatel ruky */
     justify-content: center;
 }

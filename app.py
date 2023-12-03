@@ -23,9 +23,9 @@ def view_account_page():
     return render_template("account.jinja")
 
 # First endpoint
-@app.route("/welcome")
-def view_welcome_page():
-    return render_template("welcome_page.jinja", name="Mr Yoda")
+@app.route("/my_account")
+def view_my_account_page():
+    return render_template("my_account.jinja")
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000)

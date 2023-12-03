@@ -1,0 +1,21 @@
+{% extends "__main.jinja" %}
+
+{% block content %}
+    <main>
+    <section>
+
+    <h2>  Údaje o uživatelském účtu:</h2>
+    <p>  Jméno a příjmení:  <!--  todo --> </p>
+    <p> Email: </p><br><br><br><br>
+
+
+
+
+    <a href="{{ url_for("view_account_page") }}">
+        <button id="logout-button" type="Button">Odhlásit se</button>
+    </a>
+
+    </section>
+
+</main>
+{% endblock %}
