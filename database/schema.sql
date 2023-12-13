@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS objednavka;
+DROP TABLE IF EXISTS stroj;
+DROP TABLE IF EXISTS typy_stroje;
+DROP TABLE IF EXISTS typy_uživatele;
+DROP TABLE IF EXISTS uzivatel;
+DROP TABLE IF EXISTS uzivatel_objednavka;
+
 CREATE TABLE objednavka (
     id_objednavka       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     timestamp           TIMESTAMP NOT NULL,
