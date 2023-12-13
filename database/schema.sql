@@ -24,6 +24,7 @@ CREATE TABLE stroj (
     popis                    TEXT NOT NULL,
     hodinova_cena            INTEGER NOT NULL,
     cena_dopravy_km          INTEGER NOT NULL,
+    foto                     TEXT NOT NULL,
     typy_stroje_id_typstroje INTEGER NOT NULL,
     FOREIGN KEY (typy_stroje_id_typstroje) REFERENCES typy_stroje (id_typstroje)
 );
@@ -55,3 +56,10 @@ CREATE TABLE uzivatel_objednavka (
     FOREIGN KEY (objednavka_id_objednavka) REFERENCES objednavka (id_objednavka),
     FOREIGN KEY (uzivatel_id_uzivatele) REFERENCES uzivatel (id_uzivatele)
 );
+
+INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (1, 'admin');
+INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (2, 'dispecer');
+INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (3, 'klient');
+INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (4, 'technik');
+
+INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('admin', 'admin','admin@admin','admin',1);
