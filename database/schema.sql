@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS objednavka;
 DROP TABLE IF EXISTS stroj;
 DROP TABLE IF EXISTS typy_stroje;
-DROP TABLE IF EXISTS typy_uživatele;
+DROP TABLE IF EXISTS typy_uzivatele;
 DROP TABLE IF EXISTS uzivatel;
 DROP TABLE IF EXISTS uzivatel_objednavka;
 
@@ -51,8 +51,8 @@ CREATE TABLE uzivatel (
 );
 
 CREATE TABLE uzivatel_objednavka (
-    uzivatel_id_uzivatele    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    objednavka_id_objednavka INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    uzivatel_id_uzivatele    INTEGER NOT NULL,
+    objednavka_id_objednavka INTEGER NOT NULL,
     FOREIGN KEY (objednavka_id_objednavka) REFERENCES objednavka (id_objednavka),
     FOREIGN KEY (uzivatel_id_uzivatele) REFERENCES uzivatel (id_uzivatele)
 );
