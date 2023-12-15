@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from database import database
+import forms
+from service.user_service import UserService
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -18,9 +20,19 @@ def view_reservation_page():
 def view_contact_page():
     return render_template("contacts.jinja")
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 def view_account_page():
-    return render_template("account.jinja")
+    form = forms.SignInForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = UserService.verify(email=request.form['email'], password=request.form['password'])
+        if not user:
+            flash('Incorrect email or password')
+        else:
+            session['authenticated'] = 1
+            session['email'] = user['email']
+            session['role'] = user['role']
+            return redirect(url_for('/'))
+    return render_template("account.jinja", form=form)
 
 # First endpoint
 @app.route("/my_account")
