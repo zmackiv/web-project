@@ -1,6 +1,6 @@
 import config
 import hashlib
-from vwa_zs2023_xkostrh2.database.database import get_db
+from database.database import get_db
 
 
 class UserService():
