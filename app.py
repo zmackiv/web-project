@@ -23,15 +23,16 @@ def view_contact_page():
 @app.route("/account", methods=['GET', 'POST'])
 def view_account_page():
     form = forms.SignInForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':
         user = UserService.verify(email=request.form['email'], password=request.form['password'])
         if not user:
             flash('Incorrect email or password')
         else:
             session['authenticated'] = 1
             session['email'] = user['email']
-            session['role'] = user['role']
-            return redirect(url_for('/'))
+            session['nazev'] = user['nazev']
+            flash('Success')
+            return redirect(url_for('view_my_account_page'))
     return render_template("account.jinja", form=form)
 
 # First endpoint

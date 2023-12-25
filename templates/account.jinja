@@ -13,24 +13,13 @@
             <section>
                 <article>
                     <h2>Přihlášení:</h2>
-                    <form>
-
-                        <div class="form-control">
-                            <label>Email</label>
-                            <input type="email" />
-                        </div>
-
-                        <div class="form-control">
-                            <label>Heslo</label>
-                            <input type="password" />
-                        </div>
-
-                        <div class="form-control">
-                            <a href="{{ url_for("view_my_account_page") }}">
-                                <button type="Button">Odeslat</button>
-                            </a>
-                        </div>
-                    </form>
+                    <form method=post>
+      <dl>
+        {{ render_field(form.email) }}
+        {{ render_field(form.password) }}
+      </dl>
+      <input class="button" type="submit" value=Submit>
+    </form>
                 </article>
             </section>
         </div>
