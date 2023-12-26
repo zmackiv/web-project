@@ -14,12 +14,12 @@
                 <article>
                     <h2>Přihlášení:</h2>
                     <form method=post>
-      <dl>
-        {{ render_field(form.email) }}
-        {{ render_field(form.password) }}
-      </dl>
-      <input class="button" type="submit" value=Submit>
-    </form>
+                      <dl>
+                        {{ render_field(sign_in_form.email) }}
+                        {{ render_field(sign_in_form.password) }}
+                      </dl>
+                      <input class="button" name="sign_in_submit" type="submit" value="Odeslat">
+                    </form>
                 </article>
             </section>
         </div>
@@ -30,32 +30,14 @@
             <section>
                 <article>
                     <h2>Založení účtu:</h2>
-                    <form>
-                        <div class="form-control">
-                            <label>Jméno</label>
-                            <input type="text" />
-                        </div>
-
-                        <div class="form-control">
-                            <label>Příjmení</label>
-                            <input type="text" />
-                        </div>
-
-                        <div class="form-control">
-                            <label>Email</label>
-                            <input type="email" />
-                        </div>
-
-                        <div class="form-control">
-                            <label>Heslo</label>
-                            <input type="password" />
-                        </div>
-
-                        <div class="form-control">
-                            <a href="{{ url_for("view_my_account_page") }}">
-                                <button type="Button">Odeslat</button>
-                            </a>
-                        </div>
+                    <form method=post>
+                      <dl>
+                        {{ render_field(registration_form.name) }}
+                        {{ render_field(registration_form.surname) }}
+                        {{ render_field(registration_form.email) }}
+                        {{ render_field(registration_form.password) }}
+                      </dl>
+                      <input class="button" name="registration_submit" type="submit" value="Odeslat">
                     </form>
                 </article>
             </section>

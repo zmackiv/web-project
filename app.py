@@ -22,18 +22,29 @@ def view_contact_page():
 
 @app.route("/account", methods=['GET', 'POST'])
 def view_account_page():
-    form = forms.SignInForm(request.form)
+    sign_in_form = forms.SignInForm(request.form)
+    registration_form = forms.RegistrationForm(request.form)
     if request.method == 'POST':
-        user = UserService.verify(email=request.form['email'], password=request.form['password'])
-        if not user:
-            flash('Incorrect email or password')
-        else:
-            session['authenticated'] = 1
-            session['email'] = user['email']
-            session['nazev'] = user['nazev']
-            flash('Success')
+        if 'sign_in_submit' in request.form:
+            user = UserService.verify(email=request.form['email'], password=request.form['password'])
+            if not user:
+                flash('Incorrect email or password')
+            else:
+                session['authenticated'] = 1
+                session['email'] = user['email']
+                session['nazev'] = user['nazev']
+                flash('Success')
+                return redirect(url_for('view_my_account_page'))
+        elif 'registration_submit' in request.form:
+            UserService.registrate(
+                request.form['name'],
+                request.form['surname'],
+                request.form['email'],
+                request.form['password'],
+            )
+            flash('User inserted')
             return redirect(url_for('view_my_account_page'))
-    return render_template("account.jinja", form=form)
+    return render_template("account.jinja", sign_in_form=sign_in_form, registration_form=registration_form)
 
 # First endpoint
 @app.route("/my_account")
