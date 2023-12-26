@@ -20,3 +20,14 @@ class UserService():
             return user
         else:
             return None
+
+
+
+    @staticmethod
+    def registrate(name, surname, email, password):
+        db = get_db()
+        db.execute(
+            'INSERT INTO uzivatel(jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES (?,?,?,?,?)'
+            [name, surname, email, password, 3]
+        )
+        db.commit()
