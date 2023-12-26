@@ -4,14 +4,16 @@
     <main>
     <section>
 
+    {% if session['authenticated']%}
     <h2>  Údaje o uživatelském účtu:</h2>
-    <p>  Jméno a příjmení:  <!--  todo --> </p>
-    <p> Email: </p><br><br><br><br>
+    <p>  Jméno a příjmení: {{session['jmeno']}} {{session['prijmeni']}} </p>
+    <p> Email: {{session['email']}}</p><br><br><br><br>
+    {% endif%}
 
 
 
 
-    <a href="{{ url_for("view_account_page") }}">
+    <a href="{{ url_for("logout") }}">
         <button id="logout-button" type="Button">Odhlásit se</button>
     </a>
 

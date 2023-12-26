@@ -12,7 +12,7 @@ class UserService():
         # print(hashed_passorwd.hexdigest())
 
         user = db.execute('''
-            SELECT uzivatel.id_uzivatele, uzivatel.email, typy_uzivatele.nazev
+            SELECT uzivatel.id_uzivatele, uzivatel.email, uzivatel.jmeno, uzivatel.prijmeni, typy_uzivatele.nazev
             FROM uzivatel 
             JOIN typy_uzivatele ON (typy_uzivatele_id_typuzivatele = typy_uzivatele.id_typuzivatele)
             WHERE email = ? AND heslo = ?''', [email, password]).fetchone()

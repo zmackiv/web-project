@@ -32,6 +32,8 @@ def view_account_page():
             else:
                 session['authenticated'] = 1
                 session['email'] = user['email']
+                session['jmeno'] = user['jmeno']
+                session['prijmeni'] = user['prijmeni']
                 session['nazev'] = user['nazev']
                 flash('Success')
                 return redirect(url_for('view_my_account_page'))
@@ -44,12 +46,26 @@ def view_account_page():
             )
             flash('User inserted')
             return redirect(url_for('view_my_account_page'))
+
+    if session.get('authenticated'):
+        return redirect(url_for('view_my_account_page'))
+
     return render_template("account.jinja", sign_in_form=sign_in_form, registration_form=registration_form)
 
 # First endpoint
 @app.route("/my_account")
 def view_my_account_page():
     return render_template("my_account.jinja")
+
+@app.route('/logout')
+def logout():
+    session.pop('authenticated')
+    session.pop('email')
+    session.pop('nazev')
+    session.pop('jmeno')
+    session.pop('prijmeni')
+
+    return redirect(url_for('view_homepage'))
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000)
