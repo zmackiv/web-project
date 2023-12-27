@@ -62,4 +62,7 @@ INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (2, 'dispecer');
 INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (3, 'klient');
 INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (4, 'technik');
 
-INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('admin', 'admin','admin@admin','admin',1);
+INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('Admin', 'Admin', 'admin', '74baeb21265087ea11e1555f2b1489ae16c00cbdd5b78f0c3eedd6c0c8be3a41', 1);
+INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('Dispecer', 'Dispecer', 'dispecer', '9d9ad6bf6984657b3ccf9efb93bcc2154ae9fdf2ac6cf2e221b9f7661845f8d1', 2);
+INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('Klient', 'Klient', 'klient', 'f44fe2b0f77381eb7d8cd895b73f19a95126576fe5cb0521dfb1aa1baed03f9c', 3);
+INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('Technik', 'Technik', 'technik', '2aa76a551815c813cb581ac374549265bf16720c0910d8472a425344889d82ca', 4);
