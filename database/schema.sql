@@ -13,7 +13,7 @@ CREATE TABLE objednavka (
     adresa_doruceni     TEXT NOT NULL,
     vzdalenost_doruceni TEXT NOT NULL,
     cena                INTEGER NOT NULL,
-    potvzeni            CHAR(1) NOT NULL,
+    potvrzeni           CHAR(1) NOT NULL,
     stroj_id_stroj      INTEGER NOT NULL,
     FOREIGN KEY (stroj_id_stroj) REFERENCES stroj (id_stroj)
 );
