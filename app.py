@@ -34,7 +34,7 @@ def view_account_page():
                 session['email'] = user['email']
                 session['jmeno'] = user['jmeno']
                 session['prijmeni'] = user['prijmeni']
-                session['nazev'] = user['nazev']
+                session['role'] = user['nazev']
                 flash('Success')
                 return redirect(url_for('view_my_account_page'))
         elif 'registration_submit' in request.form:
