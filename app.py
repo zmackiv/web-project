@@ -61,7 +61,7 @@ def view_my_account_page():
 def logout():
     session.pop('authenticated')
     session.pop('email')
-    session.pop('nazev')
+    session.pop('role')
     session.pop('jmeno')
     session.pop('prijmeni')
 

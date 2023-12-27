@@ -2,15 +2,19 @@
 
 {% block content %}
     <main>
-    <section>
 
-    {% if session['authenticated']%}
+    {% if 'authenticated' not in session %}
+        <p>Nejste přihlášeni.</p>
+        <a href="{{ url_for("view_account_page") }}">
+            <button type="button">Přihlásit</button>
+        </a>
+    {% endif %}
+
+    {% if session['authenticated'] %}
+    <section>
     <h2>  Údaje o uživatelském účtu:</h2>
     <p>  Jméno a příjmení: {{session['jmeno']}} {{session['prijmeni']}} </p>
     <p> Email: {{session['email']}}</p><br><br><br><br>
-    {% endif%}
-
-
 
 
     <a href="{{ url_for("logout") }}">
@@ -18,6 +22,17 @@
     </a>
 
     </section>
+    {% endif %}
+
+    {% if session['authenticated'] and session['role'] == 'klient' %}
+        <section>
+            <h2>Potvrzené rezervace:</h2>
+        </section>
+
+        <section>
+            <h2>Minulé rezervace:</h2>
+        </section>
+    {% endif %}
 
 </main>
 {% endblock %}
