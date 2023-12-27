@@ -6,8 +6,13 @@
         <span class="material-icons">menu</span>
     </div>
     <nav id="nav">
-          <a href="{{ url_for("view_homepage") }}">Úvod</a>
-          <a href="{{ url_for("view_reservation_page") }}">Rezervace</a>
-          <a href="{{ url_for("view_contact_page") }}">Kontakt</a>
-          <a href="{{ url_for("view_account_page") }}">Můj účet</a>
+        <a href="{{ url_for("view_homepage") }}">Úvod</a>
+        <a href="{{ url_for("view_reservation_page") }}">Rezervace</a>
+        <a href="{{ url_for("view_contact_page") }}">Kontakt</a>
+        {% if session['authenticated'] %}
+            <a href="{{url_for('view_account_page')}}">Můj účet - {{session['jmeno']}}</a>
+        {% else %}
+            <a href="{{ url_for("view_account_page") }}">Můj účet</a>
+        {% endif %}
+
     </nav>
