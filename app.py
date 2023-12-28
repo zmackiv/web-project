@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, session, redirect, url
 from database import database
 import forms
 from service.user_service import UserService
+from service.product_service import ProductService
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -10,7 +11,9 @@ database.init_app(app)
 
 @app.route("/")
 def view_homepage():
-    return render_template("index.jinja")
+    category_id = request.args.get('typy_stroje_id_typstroje', None, int)
+    products = ProductService.get_all(category_id)
+    return render_template("index.jinja", category_id=category_id)
 
 @app.route("/reservation")
 def view_reservation_page():
