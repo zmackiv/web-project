@@ -10,6 +10,33 @@
 
       <section>
         <h2>Naše nabídka:</h2>
+        {% if stroje | length == 0 %}
+            <div>Žádné produkty.</div>
+        {% else %}
+            <div>
+                <div class="side-by-side">
+                {% for stroj in stroje %}
+
+                        <div>
+                        <img src="{{ stroj.foto }}" alt="{{ stroj.model }}">
+                        <h3>{{ stroj.model }}</h3>
+                        <div>
+                            <p>{{stroj.popis}}</p>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+      </section>
+      <section>
+      <a href="{{ url_for("view_reservation_page") }}">
+                    <button type="button">Rezervovat</button>
+      </a>
+      </section>
+
+      <section><br>
+        <h2>Naše nabídka:</h2>
           <div class="side-by-side">
             <div>
                 <img src="{{ url_for('static', filename='img/traktor1.jpeg') }}">

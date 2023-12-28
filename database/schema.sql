@@ -66,3 +66,10 @@ INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivat
 INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('Dispecer', 'Dispecer', 'dispecer', '9d9ad6bf6984657b3ccf9efb93bcc2154ae9fdf2ac6cf2e221b9f7661845f8d1', 2);
 INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('Klient', 'Klient', 'klient', 'f44fe2b0f77381eb7d8cd895b73f19a95126576fe5cb0521dfb1aa1baed03f9c', 3);
 INSERT INTO uzivatel (jmeno, prijmeni, email, heslo, typy_uzivatele_id_typuzivatele) VALUES ('Technik', 'Technik', 'technik', '2aa76a551815c813cb581ac374549265bf16720c0910d8472a425344889d82ca', 4);
+
+INSERT INTO stroj (model, popis, hodinova_cena, cena_dopravy_km, foto, typy_stroje_id_typstroje) VALUES ('New Holland 5.2', 'Zbrusu nový traktor.', 170, 50, 'https://www.mascus.cz/_next/image?url=https%3A%2F%2Fst.mascus.com%2Fimagetilewm%2Fproduct%2F72704d0e%2Flindner-traktor-lintrac-80-4-h%2C8a5c8ba8.jpg&w=1920&q=75', 1);
+INSERT INTO stroj (model, popis, hodinova_cena, cena_dopravy_km, foto, typy_stroje_id_typstroje) VALUES ('Matador MO', 'Zbrusu nový secí stroj.', 120, 30, 'https://www.kuhncenter.cz/file/sdff-get?id=998', 2);
+INSERT INTO stroj (model, popis, hodinova_cena, cena_dopravy_km, foto, typy_stroje_id_typstroje) VALUES ('KÖCKERLING VITU', 'Zbrusu nový secí stroj.', 130, 30, 'https://www.pal.cz/getattachment/de759566-e2a7-4bf1-9593-f7518b01262e/PhotoSmall?maxsidesize=660', 2);
+
+INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (1, 'traktor');
+INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (2, 'secí stroj');

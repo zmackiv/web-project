@@ -3,6 +3,7 @@ from database import database
 import forms
 from service.user_service import UserService
 from service.product_service import ProductService
+from service.category_service import CategoryService
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -11,9 +12,10 @@ database.init_app(app)
 
 @app.route("/")
 def view_homepage():
-    category_id = request.args.get('typy_stroje_id_typstroje', None, int)
-    products = ProductService.get_all(category_id)
-    return render_template("index.jinja", category_id=category_id)
+    typy_stroje_id_typstroje = request.args.get('typy_stroje_id_typstroje', None, int)
+    stroje = ProductService.get_all(typy_stroje_id_typstroje)
+    typy_stroje = CategoryService.get_by_id(typy_stroje_id_typstroje) if typy_stroje_id_typstroje is not None else None
+    return render_template("index.jinja", stroje=stroje, typy_stroje=typy_stroje, typy_stroje_id_typstroje=typy_stroje_id_typstroje)
 
 @app.route("/reservation")
 def view_reservation_page():
