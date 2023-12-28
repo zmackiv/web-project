@@ -58,9 +58,22 @@ def view_account_page():
     return render_template("account.jinja", sign_in_form=sign_in_form, registration_form=registration_form)
 
 # First endpoint
-@app.route("/my_account")
+@app.route("/my_account", methods=['GET', 'POST'])
 def view_my_account_page():
-    return render_template("my_account.jinja")
+    new_product_form = forms.AddProductForm(request.form)
+    typy_stroje = CategoryService.get_all()
+    new_product_form.typy_stroje.choices = [(item['id_typstroje'], item['nazev']) for item in typy_stroje]
+    if request.method == 'POST':
+        ProductService.insert_product(
+            model=request.form['model'],
+            popis=request.form['popis'],
+            hod_cena=request.form['hod_cena'],
+            doprava=request.form['doprava'],
+            foto=request.form['foto'],
+            typy_stroje=request.form['typy_stroje'],
+        )
+        flash('Stroj byl přidán')
+    return render_template("my_account.jinja", new_product_form=new_product_form, typy_stroje=typy_stroje)
 
 @app.route('/logout')
 def logout():
