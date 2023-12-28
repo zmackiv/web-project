@@ -34,5 +34,24 @@
         </section>
     {% endif %}
 
+    {% if session['authenticated'] and session['role'] == 'dispecer' %}
+        <section class='side-by-side'>
+            <div>
+            <h2>Přidat nový stroj:</h2>
+            <form method=post>
+            <dl>
+              {{ render_field(new_product_form.model) }}
+              {{ render_field(new_product_form.popis) }}
+              {{ render_field(new_product_form.hod_cena) }}
+              {{ render_field(new_product_form.doprava) }}
+              {{ render_field(new_product_form.foto) }}
+              {{ render_field(new_product_form.typy_stroje) }}
+            </dl><br>
+            <input class="button" type="submit" value=Přidat>
+            </form>
+            </div>
+        </section>
+    {% endif %}
+
 </main>
 {% endblock %}
