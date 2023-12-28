@@ -18,10 +18,10 @@ class ProductService:
 
 
     @staticmethod
-    def insert_product(name, price, category_id, img=None):
+    def insert_product(model, popis, hod_cena, doprava, foto, typy_stroje):
         db = get_db()
         db.execute(
-            'INSERT INTO products (model, popis, hodinova_cena, cena_dopravy_km, foto, typy_stroje_id_typstroje) VALUES (?, ?, ?, ?, ?, ?)',
-            [name, price, category_id, img]
+            'INSERT INTO stroj (model, popis, hodinova_cena, cena_dopravy_km, foto, typy_stroje_id_typstroje) VALUES (?, ?, ?, ?, ?, ?)',
+            [model, popis, hod_cena, doprava, foto, typy_stroje]
         )
         db.commit()
