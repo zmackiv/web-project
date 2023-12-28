@@ -1,7 +1,7 @@
 from database.database import get_db
 
 
-class ProductService:
+class OrderService:
 
     @staticmethod
     def get_all_user_orders(id_uzivatele):
