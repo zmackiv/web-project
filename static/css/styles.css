@@ -279,6 +279,7 @@ main h2 {
 
 .side-by-side h3 {
     margin-bottom: 0.5rem;
+    margin-top: 1rem;
 }
 
 .side-by-side p {
@@ -297,9 +298,6 @@ button {
     cursor: pointer; /* Změna kurzoru na ukazatel ruky */
     justify-content: center;
 }
-
-
-
 
 @media screen and (max-width: 992px) {
     .side-by-side div {

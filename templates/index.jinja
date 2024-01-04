@@ -17,14 +17,16 @@
                 <div class="side-by-side">
                 {% for stroj in stroje %}
 
-                        <div>
-                        <img src="{{ stroj.foto }}" alt="{{ stroj.model }}">
-                        <h3>{{ stroj.model }}</h3>
-                        <div>
-                            <p>{{stroj.popis}}</p>
-
-                        </div>
+                    <div>
+                    <img src="{{ stroj.foto }}" alt="{{ stroj.model }}">
+                    <h3>{{ stroj.model }}</h3>
+                    {% if typy_stroje != None%}
+                    <p>Typ stroje:{{typy_stroje.nazev}}</p>
+                    {%endif%}
+                    <p>Popis: {{stroj.popis}}</p>
+                    <p>Cena stroje: {{stroj.hodinova_cena}} Kč/hodina</p>
                     </div>
+
                 {% endfor %}
             </div>
             {% endif %}

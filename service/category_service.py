@@ -11,7 +11,7 @@ class CategoryService:
         ).fetchall()
 
     @staticmethod
-    def get_by_id(id: int):
+    def get_by_id(id):
         db = get_db()
         return db.execute(
             "SELECT * FROM typy_stroje WHERE id_typstroje = ?",

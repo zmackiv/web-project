@@ -11,7 +11,7 @@ class ProductService:
         arguments = []
 
         if typy_stroje_id_typstroje is not None:
-            sql += " and typy_stroje_id_typstroje <= ?"
+            sql += " and typy_stroje_id_typstroje = ?"
             arguments.append(typy_stroje_id_typstroje)
 
         return db.execute(sql, arguments).fetchall()
