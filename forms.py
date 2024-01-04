@@ -18,3 +18,11 @@ class AddProductForm(Form):
     foto = StringField(name='foto', label='Foto', validators=[validators.Length(min=3, max=80), validators.InputRequired()])
     typy_stroje = SelectField('Typy strojů', choices=[])
 
+
+class ReservationForm1(Form):
+    datum = StringField(name='datum', label='Datum',
+                       validators=[validators.Length(min=3, max=20), validators.InputRequired()])
+    cas_od = IntegerField(name='cas_od', label='Čas od',
+                          validators=[validators.Length(min=1, max=10), validators.InputRequired()])
+    cas_do = IntegerField(name='cas_do', label='Čas do',
+                        validators=[validators.Length(min=1, max=10), validators.InputRequired()])

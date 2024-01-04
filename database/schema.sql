@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS uzivatel_objednavka;
 CREATE TABLE objednavka (
     id_objednavka       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     timestamp           TIMESTAMP NOT NULL,
+    datum               TEXT NOT NULL,
     cas_od              INTEGER NOT NULL,
     cas_do              INTEGER NOT NULL,
     adresa_doruceni     TEXT NOT NULL,
