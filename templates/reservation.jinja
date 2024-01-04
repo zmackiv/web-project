@@ -1,6 +1,13 @@
 {% extends "__main.jinja" %}
 
+
 {% block content %}
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <main>
     <section>
     <h2>Rezervace</h2>
@@ -12,18 +19,24 @@
         </a>
         {% endif %}
 
-        {% if session['role']=='klient'%}
-        <form method=post>
+        {% if session['authenticated'] and session['role']=='klient'%}
+        <section class='side-by-side'>
+            <div>
+            <form method=post>
             <dl>
-              {{ render_field(form.datum, class="form-control") }}
               {{ render_field(form.cas_od, class="form-control") }}
               {{ render_field(form.cas_do, class="form-control") }}
-
-            </dl><br>
-            <a href="{{ url_for("view_reservation_page2") }}">
+              <label>Datum</label>
+              <input type="text" id="datepicker" name="datepicker" class="form-control" placeholder="Vyberte datum">
+              <input type="hidden" id="datum" name="datum">
+              </dl><br><br><br><br><br><br><br><br><br><br><br><br>
+              <a href="{{ url_for("view_reservation_page2") }}">
             <input class="button" type="submit" value='Další strana'>
             </a>
             </form>
+            </div>
+         </section>
+
 
 
 
