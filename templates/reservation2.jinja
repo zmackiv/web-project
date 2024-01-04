@@ -13,6 +13,7 @@
         {% endif %}
 
         {% if session['authenticated'] and session['role']=='klient'%}
+            <form method='post'>
             <table>
               <tr>
                 <td>Datum</td>
@@ -26,13 +27,14 @@
                 <td>{{session['datum']}}</td>
                 <td>{{session['cas_od']}}:00</td>
                 <td>{{session['cas_do']}}:00</td>
-                <td></td>
-                <td><input type='text' id='adresa' name='adresa'></td>
-                <td><input type='text' id='poznamka' name='poznamka'></td>
+                <td>{{ render_field(form.stroj, class="form-control") }}</td>
+                <td>{{ render_field(form.adresa, class="form-control") }}</td>
+                <td>{{ render_field(form.poznamka, class="form-control") }}</td>
               </tr>
             </table><br>
 
-            <button type="button"> Rezervovat</button>
+            <input class="button" type="submit" name='reservation_submit' value=Rezervovat>
+            </form>
         {% endif %}
 
     </section>

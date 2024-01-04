@@ -26,3 +26,11 @@ class ReservationForm1(Form):
                           validators=[validators.Length(min=1, max=10), validators.InputRequired()])
     cas_do = IntegerField(name='cas_do', label='Čas do',
                         validators=[validators.Length(min=1, max=10), validators.InputRequired()])
+
+
+class ReservationForm2(Form):
+    adresa = StringField(name='adresa', label='Adresa',
+                        validators=[validators.Length(min=3, max=40), validators.InputRequired()])
+    poznamka = StringField(name='poznamka', label='Poznamka',
+                        validators=[validators.Length(min=0, max=100), validators.InputRequired()])
+    stroj = SelectField('Dostupné stroje', choices=[])
