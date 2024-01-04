@@ -13,7 +13,7 @@ class RegistrationForm(Form):
 class AddProductForm(Form):
     model = StringField(name='model', label='Model', validators=[validators.Length(min=3, max=20), validators.InputRequired()])
     popis = StringField(name='popis', label='Popis', validators=[validators.Length(min=3, max=150), validators.InputRequired()])
-    hod_cena = IntegerField(name='hod_cena', label='Hodinova cena', validators=[validators.Length(min=3, max=20), validators.InputRequired()])
+    hod_cena = IntegerField(name='hod_cena', label='Hodinová cena', validators=[validators.Length(min=3, max=20), validators.InputRequired()])
     doprava = IntegerField(name='doprava', label='Cena dopravy za km', validators=[validators.Length(min=3, max=20), validators.InputRequired()])
     foto = StringField(name='foto', label='Foto', validators=[validators.Length(min=3, max=80), validators.InputRequired()])
     typy_stroje = SelectField('Typy strojů', choices=[])

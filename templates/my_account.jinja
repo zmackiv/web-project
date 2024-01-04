@@ -40,12 +40,12 @@
             <h2>Přidat nový stroj:</h2>
             <form method=post>
             <dl>
-              {{ render_field(new_product_form.model) }}
-              {{ render_field(new_product_form.popis) }}
-              {{ render_field(new_product_form.hod_cena) }}
-              {{ render_field(new_product_form.doprava) }}
-              {{ render_field(new_product_form.foto) }}
-              {{ render_field(new_product_form.typy_stroje) }}
+              {{ render_field(new_product_form.model, class="form-control") }}
+              {{ render_field(new_product_form.popis, class="form-control") }}
+              {{ render_field(new_product_form.hod_cena, class="form-control") }}
+              {{ render_field(new_product_form.doprava, class="form-control") }}
+              {{ render_field(new_product_form.foto, class="form-control") }}
+              {{ render_field(new_product_form.typy_stroje, class="form-control") }}
             </dl><br>
             <input class="button" type="submit" value=Přidat>
             </form>

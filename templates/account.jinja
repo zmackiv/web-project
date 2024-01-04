@@ -15,8 +15,8 @@
                     <h2>Přihlášení:</h2>
                     <form method=post>
                       <dl>
-                        {{ render_field(sign_in_form.email) }}
-                        {{ render_field(sign_in_form.password) }}
+                        {{ render_field(sign_in_form.email, class="form-control") }}
+                        {{ render_field(sign_in_form.password, class="form-control") }}
                       </dl>
                       <input class="button" name="sign_in_submit" type="submit" value="Odeslat">
                     </form>
@@ -32,10 +32,10 @@
                     <h2>Založení účtu:</h2>
                     <form method=post>
                       <dl>
-                        {{ render_field(registration_form.name) }}
-                        {{ render_field(registration_form.surname) }}
-                        {{ render_field(registration_form.email) }}
-                        {{ render_field(registration_form.password) }}
+                        {{ render_field(registration_form.name, class="form-control") }}
+                        {{ render_field(registration_form.surname, class="form-control") }}
+                        {{ render_field(registration_form.email, class="form-control") }}
+                        {{ render_field(registration_form.password, class="form-control") }}
                       </dl>
                       <input class="button" name="registration_submit" type="submit" value="Odeslat">
                     </form>
