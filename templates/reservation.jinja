@@ -12,6 +12,14 @@
         </a>
         {% endif %}
 
+        {% if session['role']=='klient'%}
+        <a href="{{ url_for("view_reservation_page2") }}">
+            <button type="button"> Další strana</button>
+        </a>
+
+        {% endif %}
+
+
     </section>
     </main>
 {% endblock %}

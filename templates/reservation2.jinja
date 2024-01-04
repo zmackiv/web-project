@@ -1,0 +1,40 @@
+{% extends "__main.jinja" %}
+
+{% block content %}
+    <main>
+    <section>
+    <h2>Rezervace</h2>
+
+        {% if 'authenticated' not in session %}
+        <p>Pro rezervaci budete muset provést přihlášení nebo se zaregistrovat.</p>
+        <a href="{{ url_for("view_account_page") }}">
+            <button type="button">Přihlásit / Registrovat</button>
+        </a>
+        {% endif %}
+
+        {% if session['role']=='klient'%}
+            <table>
+              <tr>
+                <td>Datum</td>
+                <td>Čas od</td>
+                <td>Čas do</td>
+                <td>Stroj</td>
+                <td>Adresa</td>
+                <td>Poznámka</td>
+              </tr>
+              <tr>
+                <td>{{session['datum']}}</td>
+                <td>{{session['cas_od']}}</td>
+                <td>{{session['cas_do']}}</td>
+                <td></td>
+                <td><input type='text' id='adresa' name='adresa'></td>
+                <td><input type='text' id='poznamka' name='poznamka'></td>
+              </tr>
+            </table><br>
+
+            <button type="button"> Rezervovat</button>
+        {% endif %}
+
+    </section>
+    </main>
+{% endblock %}

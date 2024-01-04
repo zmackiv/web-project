@@ -17,9 +17,17 @@ def view_homepage():
     typy_stroje = CategoryService.get_by_id(typy_stroje_id_typstroje) if typy_stroje_id_typstroje is not None else None
     return render_template("index.jinja", stroje=stroje, typy_stroje=typy_stroje, typy_stroje_id_typstroje=typy_stroje_id_typstroje)
 
-@app.route("/reservation")
-def view_reservation_page():
+@app.route("/reservation1-2")
+def view_reservation_page1():
+    session['cas_od'] = request.form('cas_od')
+    session['cas_do'] = request.form('cas_do')
+    session['datum'] = request.form('datum')
+
     return render_template("reservation.jinja")
+
+@app.route("/reservation2-2")
+def view_reservation_page2():
+    return render_template("reservation2.jinja")
 
 @app.route("/contacts")
 def view_contact_page():

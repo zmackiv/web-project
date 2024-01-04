@@ -95,7 +95,7 @@ label {
 input, textarea {
     border-radius: 10px;
     border: 2px solid #78bc1b;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.5em;
     width: 95%;
 }
 
@@ -180,6 +180,33 @@ input[type="button"] {
         padding: 1em;
     }
 }
+
+/* ---Table--- */
+table{
+    width: auto;
+}
+table,th,td,tr{
+    text-align: center;
+    font-size: 14px;
+    font-family: "Times New Roman";
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 10px 30px 10px 20px;
+}
+tr:nth-child(1){
+    font-weight: bold;
+}
+td:nth-child(4){
+    width: 10em;
+}
+
+td:nth-child(5){
+    width: 15em;
+}
+td:nth-child(6){
+    width: 10em;
+}
+
 
 /* --- NAVIGATION --- */
 
