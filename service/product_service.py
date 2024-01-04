@@ -16,6 +16,14 @@ class ProductService:
 
         return db.execute(sql, arguments).fetchall()
 
+    def get_dostupne(datum = None, cas_od = None, cas_do = None):
+        db = get_db()
+
+        sql = "SELECT id_stroj, model, foto FROM stroj WHERE id_stroj NOT IN ( SELECT stroj_id_stroj FROM objednavka WHERE datum = ? AND ((cas_od >= ? AND cas_od < ?) OR(cas_do > ? AND cas_do <= ?) OR(cas_od <= ? AND cas_do >= ?)))"
+        arguments = [datum, cas_od, cas_do, cas_od, cas_do, cas_od, cas_do]
+
+        return db.execute(sql, arguments).fetchall()
+
 
     @staticmethod
     def insert_product(model, popis, hod_cena, doprava, foto, typy_stroje):
