@@ -12,7 +12,7 @@
         </a>
         {% endif %}
 
-        {% if session['role']=='klient'%}
+        {% if session['authenticated'] and session['role']=='klient'%}
             <table>
               <tr>
                 <td>Datum</td>

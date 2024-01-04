@@ -13,6 +13,7 @@ CREATE TABLE objednavka (
     cas_do              INTEGER NOT NULL,
     adresa_doruceni     TEXT NOT NULL,
     vzdalenost_doruceni TEXT NOT NULL,
+    poznamka            TEXT,
     cena                INTEGER NOT NULL,
     potvrzeni           CHAR(1) NOT NULL,
     stroj_id_stroj      INTEGER NOT NULL,
@@ -57,6 +58,9 @@ CREATE TABLE uzivatel_objednavka (
     FOREIGN KEY (objednavka_id_objednavka) REFERENCES objednavka (id_objednavka),
     FOREIGN KEY (uzivatel_id_uzivatele) REFERENCES uzivatel (id_uzivatele)
 );
+
+ALTER TABLE objednavka
+ADD COLUMN uzivatel_id_uzivatele INTEGER REFERENCES uzivatel (id_uzivatele);
 
 INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (1, 'admin');
 INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (2, 'dispecer');
