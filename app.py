@@ -46,7 +46,7 @@ def view_reservation_page2():
                 uzivatel_id_uzivatele=session['id_uzivatele'],
             )
             return redirect(url_for('view_my_account_page'))
-    return render_template("reservation2.jinja", form=form)
+    return render_template("reservation2.jinja", form=form, dostupne_stroje=dostupne_stroje)
 @app.route("/contacts")
 def view_contact_page():
     return render_template("contacts.jinja")

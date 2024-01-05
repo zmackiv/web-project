@@ -13,6 +13,26 @@
         {% endif %}
 
         {% if session['authenticated'] and session['role']=='klient'%}
+            <section>
+            <h3>Volné stroje pro daný čas:</h3><br>
+            {% if dostupne_stroje | length == 0 %}
+                <div>Omlouváme se, nejsou k dispozici žádné stroje. Můžete se vrátit a vybrat jiné datum a čas.</div><br>
+                <a href="{{ url_for("view_reservation_page1") }}">
+                    <button type="button">Vrátit zpět</button>
+                </a>
+            {% else %}
+                <div>
+                    <div class="side-by-side-stroj">
+                    {% for stroj in dostupne_stroje %}
+                        <div>
+                        <img src="{{ stroj.foto }}" alt="{{ stroj.model }}">
+                        <h3>{{ stroj.model }}</h3><br>
+                        <p>Popis: {{stroj.popis}}</p>
+                        </div>
+                    {% endfor %}
+                    </div>
+
+          </section>
             <form method='post'>
             <table>
               <tr>
@@ -35,6 +55,7 @@
 
             <button type="submit" name='reservation_submit'>Rezervovat</button>
             </form>
+        {% endif %}
         {% endif %}
 
     </section>

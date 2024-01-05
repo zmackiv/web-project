@@ -144,6 +144,22 @@ input[type="button"] {
     font-size: 0.9em;
 }
 
+.side-by-side-stroj{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+}
+
+.side-by-side-stroj div{
+    width: calc(30% - 1em);
+    box-sizing: border-box;
+    display: block;
+    background: #e5f7cb;
+    padding: 1em 1.5em;
+    margin-bottom: 1em;
+}
+
 @media screen and (max-width: 992px) {
     .side-by-side div {
         width: 80%;
