@@ -99,11 +99,11 @@ def view_account_page():
 def view_my_account_page():
     user_role = session.get('role')
     if user_role == 'klient':
-        today_date = datetime.now().strftime('%d-%m-%Y')
+        today_date = datetime.now().strftime('%Y-%m-%d')
         orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
         past_orders = OrderService.get_past_user_orders(session.get('id_uzivatele'), today_date)
         future_orders = OrderService.get_future_user_orders(session.get('id_uzivatele'), today_date)
-        return render_template("my_account.jinja", past_orders=orders, future_orders=orders)
+        return render_template("my_account.jinja", past_orders=past_orders, future_orders=future_orders)
     if user_role == 'technik':
         return render_template("my_account.jinja")
     if user_role == 'dispecer':
