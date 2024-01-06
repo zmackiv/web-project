@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS uzivatel_objednavka;
 CREATE TABLE objednavka (
     id_objednavka       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     timestamp           TIMESTAMP NOT NULL,
-    datum               TEXT NOT NULL,
+    datum               DATETIME NOT NULL,
     cas_od              INTEGER NOT NULL,
     cas_do              INTEGER NOT NULL,
     adresa_doruceni     TEXT NOT NULL,
@@ -80,7 +80,7 @@ INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (1, 'traktor');
 INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (2, 'secí stroj');
 
 INSERT INTO objednavka (id_objednavka, timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, stroj_id_stroj)
-VALUES (5, '2024-01-07 14:30:00', '7.1.2024', 8, 12, 'Brno', '50', 'poznamka', 500, '1', 2);
+VALUES (5, '2024-01-07 14:30:00', '2024-01-07', 8, 12, 'Brno', '50', 'poznamka', 500, '1', 2);
 
 
 INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
@@ -88,3 +88,9 @@ VALUES (4, 5);
 
 INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
 VALUES (3, 5);
+
+INSERT INTO objednavka (id_objednavka, timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, stroj_id_stroj)
+VALUES (6, '2024-01-03 14:30:00', '2024-01-03', 8, 12, 'Brno', '50', 'poznamka', 500, '1', 1);
+
+INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
+VALUES (3, 6);
