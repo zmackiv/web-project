@@ -85,3 +85,6 @@ VALUES (5, '2024-01-07 14:30:00', '7.1.2024', 8, 12, 'Brno', '50', 'poznamka', 5
 
 INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
 VALUES (4, 5);
+
+INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
+VALUES (3, 5);
