@@ -26,11 +26,67 @@
 
     {% if session['authenticated'] and session['role'] == 'klient' %}
         <section>
-            <h2>Potvrzené rezervace:</h2>
+            <h2>Aktuální rezervace:</h2>
+            <table>
+                <tr>
+                    <th>ID objednávky</th>
+                    <th>Datum</th>
+                    <th>Cas od</th>
+                    <th>Cas do</th>
+                    <th>Adresa doruceni</th>
+                    <th>Vzdalenost doruceni</th>
+                    <th>Poznamka</th>
+                    <th>Cena</th>
+                    <th>Stroj</th>
+                    <th>Potvrzeno</th>
+                </tr>
+                {% for order in future_orders %}
+                    <tr>
+                        <td>{{ order.id_objednavka }}</td>
+                        <td>{{ order.datum }}</td>
+                        <td>{{ order.cas_od }}</td>
+                        <td>{{ order.cas_do }}</td>
+                        <td>{{ order.adresa_doruceni }}</td>
+                        <td>{{ order.vzdalenost_doruceni }}</td>
+                        <td>{{ order.poznamka }}</td>
+                        <td>{{ order.cena }}</td>
+                        <td>{{ order.model }}</td>
+                        <td>{{ order.potvrzeni }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </section>
 
         <section>
             <h2>Minulé rezervace:</h2>
+            <table>
+                <tr>
+                    <th>ID objednávky</th>
+                    <th>Datum</th>
+                    <th>Cas od</th>
+                    <th>Cas do</th>
+                    <th>Adresa doruceni</th>
+                    <th>Vzdalenost doruceni</th>
+                    <th>Poznamka</th>
+                    <th>Cena</th>
+                    <th>Stroj</th>
+                    <th>Potvrzeno</th>
+                </tr>
+                {% for order in past_orders %}
+                    <tr>
+                        <td>{{ order.id_objednavka }}</td>
+                        <td>{{ order.datum }}</td>
+                        <td>{{ order.cas_od }}</td>
+                        <td>{{ order.cas_do }}</td>
+                        <td>{{ order.adresa_doruceni }}</td>
+                        <td>{{ order.vzdalenost_doruceni }}</td>
+                        <td>{{ order.poznamka }}</td>
+                        <td>{{ order.cena }}</td>
+                        <td>{{ order.model }}</td>
+                        <td>{{ order.potvrzeni }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </section>
     {% endif %}
 
