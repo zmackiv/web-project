@@ -78,3 +78,10 @@ INSERT INTO stroj (model, popis, hodinova_cena, cena_dopravy_km, foto, typy_stro
 
 INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (1, 'traktor');
 INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (2, 'secí stroj');
+
+INSERT INTO objednavka (id_objednavka, timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, stroj_id_stroj)
+VALUES (5, '2024-01-07 14:30:00', '7.1.2024', 8, 12, 'Brno', '50', 'poznamka', 500, '1', 2);
+
+
+INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
+VALUES (4, 5);
