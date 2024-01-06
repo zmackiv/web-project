@@ -27,3 +27,33 @@ class OrderService:
             [aktualni_cas, datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj, uzivatel_id_uzivatele]
         )
         db.commit()
+
+    @staticmethod
+    def get_past_user_orders(id_uzivatele, today_date):
+        db = get_db()
+
+        sql = '''
+            SELECT objednavka.*, stroj.model
+            FROM objednavka
+            INNER JOIN uzivatel_objednavka ON objednavka.id_objednavka = uzivatel_objednavka.objednavka_id_objednavka
+            INNER JOIN stroj ON objednavka.stroj_id_stroj = stroj.id_stroj
+            WHERE uzivatel_objednavka.uzivatel_id_uzivatele = ? AND DATE(objednavka.datum) < ?
+            '''
+        arguments = [id_uzivatele, today_date]
+
+        return db.execute(sql, arguments).fetchall()
+
+    @staticmethod
+    def get_future_user_orders(id_uzivatele, today_date):
+        db = get_db()
+
+        sql = '''
+                SELECT objednavka.*, stroj.model
+                FROM objednavka
+                INNER JOIN uzivatel_objednavka ON objednavka.id_objednavka = uzivatel_objednavka.objednavka_id_objednavka
+                INNER JOIN stroj ON objednavka.stroj_id_stroj = stroj.id_stroj
+                WHERE uzivatel_objednavka.uzivatel_id_uzivatele = ? AND DATE(objednavka.datum) >= ?
+                '''
+        arguments = [id_uzivatele, today_date]
+
+        return db.execute(sql, arguments).fetchall()
