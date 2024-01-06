@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 from database import database
 import forms
+from datetime import datetime
 from service.user_service import UserService
 from service.product_service import ProductService
 from service.category_service import CategoryService
@@ -34,9 +35,9 @@ def view_reservation_page1():
         return render_template("reservation.jinja", orders=orders)
 
     if user_role == 'dispecer':
-        pass
+        return render_template("reservation.jinja")
     if user_role == 'admin':
-        pass
+        return render_template("reservation.jinja")
 
 @app.route("/reservation2-2", methods=['GET', 'POST'])
 def view_reservation_page2():
@@ -96,20 +97,32 @@ def view_account_page():
 # First endpoint
 @app.route("/my_account", methods=['GET', 'POST'])
 def view_my_account_page():
-    new_product_form = forms.AddProductForm(request.form)
-    typy_stroje = CategoryService.get_all()
-    new_product_form.typy_stroje.choices = [(item['id_typstroje'], item['nazev']) for item in typy_stroje]
-    if request.method == 'POST':
-        ProductService.insert_product(
-            model=request.form['model'],
-            popis=request.form['popis'],
-            hod_cena=request.form['hod_cena'],
-            doprava=request.form['doprava'],
-            foto=request.form['foto'],
-            typy_stroje=request.form['typy_stroje'],
-        )
-        flash('Stroj byl přidán')
-    return render_template("my_account.jinja", new_product_form=new_product_form, typy_stroje=typy_stroje)
+    user_role = session.get('role')
+    if user_role == 'klient':
+        today_date = datetime.now().strftime('%d-%m-%Y')
+        orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
+        past_orders = OrderService.get_past_user_orders(session.get('id_uzivatele'), today_date)
+        future_orders = OrderService.get_future_user_orders(session.get('id_uzivatele'), today_date)
+        return render_template("my_account.jinja", past_orders=orders, future_orders=orders)
+    if user_role == 'technik':
+        return render_template("my_account.jinja")
+    if user_role == 'dispecer':
+        new_product_form = forms.AddProductForm(request.form)
+        typy_stroje = CategoryService.get_all()
+        new_product_form.typy_stroje.choices = [(item['id_typstroje'], item['nazev']) for item in typy_stroje]
+        if request.method == 'POST':
+            ProductService.insert_product(
+                model=request.form['model'],
+                popis=request.form['popis'],
+                hod_cena=request.form['hod_cena'],
+                doprava=request.form['doprava'],
+                foto=request.form['foto'],
+                typy_stroje=request.form['typy_stroje'],
+            )
+            flash('Stroj byl přidán')
+        return render_template("my_account.jinja", new_product_form=new_product_form, typy_stroje=typy_stroje)
+    if user_role == 'admin':
+        return render_template("my_account.jinja")
 
 @app.route('/logout')
 def logout():
