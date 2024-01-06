@@ -30,7 +30,8 @@ def view_reservation_page1():
             return redirect(url_for('view_reservation_page2'))
         return render_template("reservation.jinja", form=form)
     if user_role == 'technik':
-        return render_template("reservation.jinja")
+        orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
+        return render_template("reservation.jinja", objednavky=orders)
 
     if user_role == 'dispecer':
         pass

@@ -41,6 +41,31 @@
         {% if session['authenticated'] and session['role']=='technik'%}
         <section>
                 <p>Zde bude vypis prirazenych rezervaci technika.</p>
+                <h1>Objednávky technika</h1>
+            <table>
+                <tr>
+                    <th>ID objednávky</th>
+                    <th>Datum</th>
+                    <th>Cas od</th>
+                    <th>Cas do</th>
+                    <th>Adresa doruceni</th>
+                    <th>Vzdalenost doruceni</th>
+                    <th>Poznamka</th>
+                    <th>Stroj</th>
+                </tr>
+                {% for objednavka in objednavky %}
+                    <tr>
+                        <td>{{ objednavka.id_objednavka }}</td>
+                        <td>{{ objednavka.datum }}</td>
+                        <td>{{ objednavka.cas_od }}</td>
+                        <td>{{ objednavka.cas_do }}</td>
+                        <td>{{ objednavka.adresa_doruceni }}</td>
+                        <td>{{ objednavka.vzdalenost_doruceni }}</td>
+                        <td>{{ objednavka.poznamka }}</td>
+                        <td>{{ objednavka.nazev_stroje }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
          </section>
         {% endif %}
 
