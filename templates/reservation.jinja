@@ -36,12 +36,12 @@
             </form>
             </div>
          </section>
+        {% endif %}
 
-
-
-
-
-
+        {% if session['authenticated'] and session['role']=='technik'%}
+        <section>
+                <p>Zde bude vypis prirazenych rezervaci technika.</p>
+         </section>
         {% endif %}
 
 

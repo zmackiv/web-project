@@ -20,14 +20,22 @@ def view_homepage():
 
 @app.route("/reservation1-2", methods=['GET', 'POST'])
 def view_reservation_page1():
-    form = forms.ReservationForm1(request.form)
-    if request.method == 'POST':
-        session['cas_od'] = request.form['cas_od']
-        session['cas_do'] = request.form['cas_do']
-        session['datum'] = request.form['datum']
-        return redirect(url_for('view_reservation_page2'))
+    user_role = session.get('role')
+    if user_role == 'klient':
+        form = forms.ReservationForm1(request.form)
+        if request.method == 'POST':
+            session['cas_od'] = request.form['cas_od']
+            session['cas_do'] = request.form['cas_do']
+            session['datum'] = request.form['datum']
+            return redirect(url_for('view_reservation_page2'))
+        return render_template("reservation.jinja", form=form)
+    if user_role == 'technik':
+        return render_template("reservation.jinja")
 
-    return render_template("reservation.jinja", form=form)
+    if user_role == 'dispecer':
+        pass
+    if user_role == 'admin':
+        pass
 
 @app.route("/reservation2-2", methods=['GET', 'POST'])
 def view_reservation_page2():
