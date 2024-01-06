@@ -31,7 +31,7 @@ def view_reservation_page1():
         return render_template("reservation.jinja", form=form)
     if user_role == 'technik':
         orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
-        return render_template("reservation.jinja", objednavky=orders)
+        return render_template("reservation.jinja", orders=orders)
 
     if user_role == 'dispecer':
         pass

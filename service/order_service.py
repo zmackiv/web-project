@@ -9,8 +9,9 @@ class OrderService:
         db = get_db()
 
         sql = '''
-            SELECT objednavka.* FROM objednavka
+            SELECT objednavka.*, stroj.model FROM objednavka
             INNER JOIN uzivatel_objednavka ON objednavka.id_objednavka = uzivatel_objednavka.objednavka_id_objednavka
+            INNER JOIN stroj ON objednavka.stroj_id_stroj = stroj.id_stroj
             WHERE uzivatel_objednavka.uzivatel_id_uzivatele = ?
         '''
         arguments = [id_uzivatele]

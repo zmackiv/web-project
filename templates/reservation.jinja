@@ -53,16 +53,16 @@
                     <th>Poznamka</th>
                     <th>Stroj</th>
                 </tr>
-                {% for objednavka in objednavky %}
+                {% for order in orders %}
                     <tr>
-                        <td>{{ objednavka.id_objednavka }}</td>
-                        <td>{{ objednavka.datum }}</td>
-                        <td>{{ objednavka.cas_od }}</td>
-                        <td>{{ objednavka.cas_do }}</td>
-                        <td>{{ objednavka.adresa_doruceni }}</td>
-                        <td>{{ objednavka.vzdalenost_doruceni }}</td>
-                        <td>{{ objednavka.poznamka }}</td>
-                        <td>{{ objednavka.nazev_stroje }}</td>
+                        <td>{{ order.id_objednavka }}</td>
+                        <td>{{ order.datum }}</td>
+                        <td>{{ order.cas_od }}</td>
+                        <td>{{ order.cas_do }}</td>
+                        <td>{{ order.adresa_doruceni }}</td>
+                        <td>{{ order.vzdalenost_doruceni }}</td>
+                        <td>{{ order.poznamka }}</td>
+                        <td>{{ order.model }}</td>
                     </tr>
                 {% endfor %}
             </table>
