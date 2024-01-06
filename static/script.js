@@ -10,7 +10,7 @@ document.getElementById("nav")
 
 $(function () {
         $("#datepicker").datepicker({
-            dateFormat: "dd-mm-yy", // Formát data (změňte podle potřeby)
+            dateFormat: "yy-mm-dd", // Formát data (změňte podle potřeby)
             onSelect: function (dateText) {
                 $("#datum").val(dateText); // Uloží vybrané datum do skrytého pole s id 'datum'
             }
