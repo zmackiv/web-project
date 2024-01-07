@@ -22,6 +22,7 @@ def view_homepage():
 @app.route("/reservation1-2", methods=['GET', 'POST'])
 def view_reservation_page1():
     user_role = session.get('role')
+    prihlasen = session.get('authenticated')
     if user_role == 'klient':
         form = forms.ReservationForm1(request.form)
         if request.method == 'POST':
@@ -31,17 +32,27 @@ def view_reservation_page1():
             return redirect(url_for('view_reservation_page2'))
         return render_template("reservation.jinja", form=form)
     if user_role == 'technik':
-        orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
-        return render_template("reservation.jinja", orders=orders)
+        today_date = datetime.now().strftime('%Y-%m-%d')
+        past_orders = OrderService.get_past_user_orders(today_date, session.get('id_uzivatele'))
+        future_orders = OrderService.get_future_user_orders(today_date, session.get('id_uzivatele'))
+        return render_template("reservation.jinja", past_orders=past_orders, future_orders=future_orders)
 
     if user_role == 'dispecer':
-        return render_template("reservation.jinja")
+        today_date = datetime.now().strftime('%Y-%m-%d')
+        past_orders = OrderService.get_past_user_orders(today_date)
+        print(past_orders)
+        future_conf_orders = OrderService.get_future_user_orders(today_date, conf=1)
+        future_not_conf_orders = OrderService.get_future_user_orders(today_date, conf=0)
+        return render_template("reservation.jinja", past_orders=past_orders, future_conf_orders=future_conf_orders, future_not_conf_orders=future_not_conf_orders)
     if user_role == 'admin':
+        return render_template("reservation.jinja")
+    if prihlasen == None:
         return render_template("reservation.jinja")
 
 @app.route("/reservation2-2", methods=['GET', 'POST'])
 def view_reservation_page2():
     form = forms.ReservationForm2(request.form)
+    id_posledni= OrderService.get_last_id()
     dostupne_stroje = ProductService.get_dostupne(session['datum'], session['cas_od'], session['cas_do'])
     form.stroj.choices = [(item['id_stroj'], item['model']) for item in dostupne_stroje]
     if request.method == 'POST':
@@ -54,6 +65,7 @@ def view_reservation_page2():
                 poznamka=request.form['poznamka'],
                 stroj=request.form['stroj'],
                 uzivatel_id_uzivatele=session['id_uzivatele'],
+                id_posledni=id_posledni,
             )
             return redirect(url_for('view_my_account_page'))
     return render_template("reservation2.jinja", form=form, dostupne_stroje=dostupne_stroje)
@@ -101,8 +113,8 @@ def view_my_account_page():
     if user_role == 'klient':
         today_date = datetime.now().strftime('%Y-%m-%d')
         orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
-        past_orders = OrderService.get_past_user_orders(session.get('id_uzivatele'), today_date)
-        future_orders = OrderService.get_future_user_orders(session.get('id_uzivatele'), today_date)
+        past_orders = OrderService.get_past_user_orders(today_date, session.get('id_uzivatele') )
+        future_orders = OrderService.get_future_user_orders(today_date, session.get( 'id_uzivatele') )
         return render_template("my_account.jinja", past_orders=past_orders, future_orders=future_orders)
     if user_role == 'technik':
         return render_template("my_account.jinja")
