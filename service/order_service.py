@@ -19,17 +19,25 @@ class OrderService:
         return db.execute(sql, arguments).fetchall()
 
     @staticmethod
-    def insert_order(datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj, uzivatel_id_uzivatele):
+    def insert_order(datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj, uzivatel_id_uzivatele, id_posledni):
         db = get_db()
         aktualni_cas = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         db.execute(
-            'INSERT INTO objednavka (timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, stroj_id_stroj, uzivatel_id_uzivatele) VALUES (?, ?, ?, ?, ?, 0, ?, 0, 0, ?, ?)',
-            [aktualni_cas, datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj, uzivatel_id_uzivatele]
+            'INSERT INTO objednavka (timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, stroj_id_stroj) VALUES (?, ?, ?, ?, ?, 0, ?, 0, 0, ?)',
+            [aktualni_cas, datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj]
         )
         db.commit()
+        print(f"Inserted into objednavka table")
+        print("Před vložením do uzivatel_objednavka:", uzivatel_id_uzivatele, id_posledni['MAX(id_objednavka)+1'])
+        db.execute(
+            'INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka) VALUES (?, ?)',
+            [uzivatel_id_uzivatele, id_posledni['MAX(id_objednavka)+1']]
+        )
+        db.commit()
+        print(f"Inserted into uzivatel_objednavka table")
 
     @staticmethod
-    def get_past_user_orders(id_uzivatele, today_date):
+    def get_past_user_orders( today_date = None, id_uzivatele = None):
         db = get_db()
 
         sql = '''
@@ -37,14 +45,24 @@ class OrderService:
             FROM objednavka
             INNER JOIN uzivatel_objednavka ON objednavka.id_objednavka = uzivatel_objednavka.objednavka_id_objednavka
             INNER JOIN stroj ON objednavka.stroj_id_stroj = stroj.id_stroj
-            WHERE uzivatel_objednavka.uzivatel_id_uzivatele = ? AND DATE(objednavka.datum) < ?
+            WHERE 1=1 
             '''
-        arguments = [id_uzivatele, today_date]
+        arguments = []
+
+        if today_date is not None:
+            sql += " and DATE(objednavka.datum) < ?"
+            arguments.append(today_date)
+
+        if id_uzivatele is not None:
+            sql += " and uzivatel_objednavka.uzivatel_id_uzivatele = ?"
+            arguments.append(id_uzivatele)
+
+
 
         return db.execute(sql, arguments).fetchall()
 
     @staticmethod
-    def get_future_user_orders(id_uzivatele, today_date):
+    def get_future_user_orders( today_date = None, id_uzivatele = None, conf = None ):
         db = get_db()
 
         sql = '''
@@ -52,8 +70,25 @@ class OrderService:
                 FROM objednavka
                 INNER JOIN uzivatel_objednavka ON objednavka.id_objednavka = uzivatel_objednavka.objednavka_id_objednavka
                 INNER JOIN stroj ON objednavka.stroj_id_stroj = stroj.id_stroj
-                WHERE uzivatel_objednavka.uzivatel_id_uzivatele = ? AND DATE(objednavka.datum) >= ?
+                WHERE 1=1 
                 '''
-        arguments = [id_uzivatele, today_date]
+        arguments = []
+
+        if today_date is not None:
+            sql += " and DATE(objednavka.datum) >= ?"
+            arguments.append(today_date)
+
+        if conf is not None:
+            sql += " and objednavka.potvrzeni = ?"
+            arguments.append(conf)
+
+        if id_uzivatele is not None:
+            sql += " and uzivatel_objednavka.uzivatel_id_uzivatele = ?"
+            arguments.append(id_uzivatele)
 
         return db.execute(sql, arguments).fetchall()
+
+    def get_last_id():
+        db = get_db()
+        sql = '''SELECT MAX(id_objednavka)+1 FROM objednavka'''
+        return db.execute(sql).fetchone()
