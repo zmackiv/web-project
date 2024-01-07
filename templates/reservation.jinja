@@ -13,60 +13,164 @@
     <h2>Rezervace</h2>
 
         {% if 'authenticated' not in session %}
-        <p>Pro rezervaci budete muset provést přihlášení nebo se zaregistrovat.</p>
-        <a href="{{ url_for("view_account_page") }}">
-            <button type="button">Přihlásit / Registrovat</button>
-        </a>
+            <p>Pro rezervaci budete muset provést přihlášení nebo se zaregistrovat.</p>
+            <a href="{{ url_for("view_account_page") }}">
+                <button type="button">Přihlásit / Registrovat</button>
+            </a>
         {% endif %}
 
         {% if session['authenticated'] and session['role']=='klient'%}
-        <section class='side-by-side'>
-            <div>
-            <form method=post>
-            <dl>
-              {{ render_field(form.cas_od, class="form-control") }}
-              {{ render_field(form.cas_do, class="form-control") }}
-              <label>Datum</label>
-              <input type="text" id="datepicker" name="datepicker" class="form-control" placeholder="Vyberte datum">
-              <input type="hidden" id="datum" name="datum">
-              </dl><br><br><br><br><br><br><br><br><br><br><br><br>
-              <a href="{{ url_for("view_reservation_page2") }}">
-            <button type="submit">Další strana</button>
-            </a>
-            </form>
-            </div>
-         </section>
-        {% endif %}
+            <section class='side-by-side'>
+                <div>
+                <form method=post>
+                <dl>
+                  {{ render_field(form.cas_od, class="form-control") }}
+                  {{ render_field(form.cas_do, class="form-control") }}
+                  <label>Datum</label>
+                  <input type="text" id="datepicker" name="datepicker" class="form-control" placeholder="Vyberte datum">
+                  <input type="hidden" id="datum" name="datum">
+                  </dl><br><br><br><br><br><br><br><br><br><br><br><br>
+                  <a href="{{ url_for("view_reservation_page2") }}">
+                <button type="submit">Další strana</button>
+                </a>
+                </form>
+                </div>
+             </section>
+            {% endif %}
 
         {% if session['authenticated'] and session['role']=='technik'%}
-        <section>
-                <p>Zde bude vypis prirazenych rezervaci technika.</p>
-                <h1>Objednávky technika</h1>
-            <table>
-                <tr>
-                    <th>ID objednávky</th>
-                    <th>Datum</th>
-                    <th>Cas od</th>
-                    <th>Cas do</th>
-                    <th>Adresa doruceni</th>
-                    <th>Vzdalenost doruceni</th>
-                    <th>Poznamka</th>
-                    <th>Stroj</th>
-                </tr>
-                {% for order in orders %}
+            <section>
+                    <p>Zde bude vypis prirazenych rezervaci technika.</p>
+                    <h1>Nadcházející objednávky technika</h1><br>
+                <table>
                     <tr>
-                        <td>{{ order.id_objednavka }}</td>
-                        <td>{{ order.datum }}</td>
-                        <td>{{ order.cas_od }}</td>
-                        <td>{{ order.cas_do }}</td>
-                        <td>{{ order.adresa_doruceni }}</td>
-                        <td>{{ order.vzdalenost_doruceni }}</td>
-                        <td>{{ order.poznamka }}</td>
-                        <td>{{ order.model }}</td>
+                        <th>ID objednávky</th>
+                        <th>Datum</th>
+                        <th>Cas od</th>
+                        <th>Cas do</th>
+                        <th>Adresa doruceni</th>
+                        <th>Vzdalenost doruceni</th>
+                        <th>Poznamka</th>
+                        <th>Stroj</th>
                     </tr>
-                {% endfor %}
-            </table>
-         </section>
+                    {% for order in future_orders %}
+                        <tr>
+                            <td>{{ order.id_objednavka }}</td>
+                            <td>{{ order.datum }}</td>
+                            <td>{{ order.cas_od }}</td>
+                            <td>{{ order.cas_do }}</td>
+                            <td>{{ order.adresa_doruceni }}</td>
+                            <td>{{ order.vzdalenost_doruceni }}</td>
+                            <td>{{ order.poznamka }}</td>
+                            <td>{{ order.model }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <br><h1>Historické objednávky technika</h1><br>
+                <table>
+                    <tr>
+                        <th>ID objednávky</th>
+                        <th>Datum</th>
+                        <th>Cas od</th>
+                        <th>Cas do</th>
+                        <th>Adresa doruceni</th>
+                        <th>Vzdalenost doruceni</th>
+                        <th>Poznamka</th>
+                        <th>Stroj</th>
+                    </tr>
+                    {% for order in past_orders %}
+                        <tr>
+                            <td>{{ order.id_objednavka }}</td>
+                            <td>{{ order.datum }}</td>
+                            <td>{{ order.cas_od }}</td>
+                            <td>{{ order.cas_do }}</td>
+                            <td>{{ order.adresa_doruceni }}</td>
+                            <td>{{ order.vzdalenost_doruceni }}</td>
+                            <td>{{ order.poznamka }}</td>
+                            <td>{{ order.model }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+             </section>
+        {% endif %}
+
+        {% if session['authenticated'] and (session['role']=='dispecer' or session['role']=='admin')%}
+            <section>
+                    <h1>Nadcházející nepotvrzené objednávky</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Datum, od-do</th>
+                        <th>Stroj</th>
+                        <th>Adresa doruceni</th>
+                        <th>Vzdalenost doruceni</th>
+                        <th>Poznamka</th>
+                        <th>Cena</th>
+
+                    </tr>
+                    {% for order in future_not_conf_orders %}
+                        <tr>
+                            <td>{{ order.id_objednavka }}</td>
+                            <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }}</td>
+                            <td>{{ order.model }}</td>
+                            <td>{{ order.adresa_doruceni }}</td>
+                            <td>{{ order.vzdalenost_doruceni }}</td>
+                            <td>{{ order.poznamka }}</td>
+                            <td>{{ order.cena }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <br><h1>Nadcházející potvrzené objednávky</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Datum</th>
+                        <th>Cas od</th>
+                        <th>Cas do</th>
+                        <th>Adresa doruceni</th>
+                        <th>Vzdalenost doruceni</th>
+                        <th>Poznamka</th>
+                        <th>Stroj</th>
+                    </tr>
+                    {% for order in future_conf_orders %}
+                        <tr>
+                            <td>{{ order.id_objednavka }}</td>
+                            <td>{{ order.datum }}</td>
+                            <td>{{ order.cas_od }}</td>
+                            <td>{{ order.cas_do }}</td>
+                            <td>{{ order.adresa_doruceni }}</td>
+                            <td>{{ order.vzdalenost_doruceni }}</td>
+                            <td>{{ order.poznamka }}</td>
+                            <td>{{ order.model }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <br><h1>Historické objednávky</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Datum</th>
+                        <th>Cas od</th>
+                        <th>Cas do</th>
+                        <th>Adresa doruceni</th>
+                        <th>Vzdalenost doruceni</th>
+                        <th>Poznamka</th>
+                        <th>Stroj</th>
+                    </tr>
+                    {% for order in past_orders %}
+                        <tr>
+                            <td>{{ order.id_objednavka }}</td>
+                            <td>{{ order.datum }}</td>
+                            <td>{{ order.cas_od }}</td>
+                            <td>{{ order.cas_do }}</td>
+                            <td>{{ order.adresa_doruceni }}</td>
+                            <td>{{ order.vzdalenost_doruceni }}</td>
+                            <td>{{ order.poznamka }}</td>
+                            <td>{{ order.model }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+             </section>
         {% endif %}
 
 
