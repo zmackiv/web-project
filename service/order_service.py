@@ -27,14 +27,13 @@ class OrderService:
             [aktualni_cas, datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj]
         )
         db.commit()
-        print(f"Inserted into objednavka table")
-        print("Před vložením do uzivatel_objednavka:", uzivatel_id_uzivatele, id_posledni['MAX(id_objednavka)+1'])
+
         db.execute(
             'INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka) VALUES (?, ?)',
             [uzivatel_id_uzivatele, id_posledni['MAX(id_objednavka)+1']]
         )
         db.commit()
-        print(f"Inserted into uzivatel_objednavka table")
+
 
     @staticmethod
     def get_past_user_orders( today_date = None, id_uzivatele = None):
@@ -92,3 +91,16 @@ class OrderService:
         db = get_db()
         sql = '''SELECT MAX(id_objednavka)+1 FROM objednavka'''
         return db.execute(sql).fetchone()
+
+    def update_order(id_objednavka, technik, cena):
+        db = get_db()
+
+        db.execute(' UPDATE objednavka SET cena = ?, potvrzeni = 1 WHERE id_objednavka = ?',
+                    [cena, id_objednavka])
+        db.commit()
+
+        db.execute(' INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka) VALUES (?, ?)',
+                   [technik, id_objednavka])
+        db.commit()
+
+
