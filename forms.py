@@ -34,3 +34,8 @@ class ReservationForm2(Form):
     poznamka = StringField(name='poznamka', label='',
                         validators=[validators.Length(min=0, max=100)])
     stroj = SelectField("", choices=[])
+
+class ObjednavkaForm(Form):
+    cena = StringField(name='cena', label='',
+                           validators=[validators.Length(min=0, max=5)])
+    technik = SelectField("", choices=[])
