@@ -37,3 +37,32 @@ class UserService():
         db.execute(sql, params)
 
         db.commit()
+
+    def get_technik(id_objednavka):
+        db = get_db()
+
+        objednavka_info = db.execute(
+            "SELECT datum, cas_od, cas_do FROM objednavka WHERE id_objednavka = ?",
+            [id_objednavka]
+        ).fetchone()
+
+        if not objednavka_info:
+            return []
+
+        datum, cas_od, cas_do = objednavka_info
+
+        sql = '''SELECT id_uzivatele, prijmeni 
+                 FROM uzivatel 
+                 JOIN typy_uzivatele on uzivatel.typy_uzivatele_id_typuzivatele = typy_uzivatele.id_typuzivatele
+                 WHERE id_uzivatele NOT IN 
+                 ( SELECT uo.uzivatel_id_uzivatele 
+                 FROM uzivatel_objednavka uo
+            JOIN objednavka o ON uo.objednavka_id_objednavka = o.id_objednavka
+            WHERE o.id_objednavka != ? AND (
+                (o.datum = ? AND o.cas_od >= ? AND o.cas_od < ?) OR
+                (o.datum = ? AND o.cas_do > ? AND o.cas_do <= ?) OR
+                (o.datum = ? AND o.cas_od <= ? AND o.cas_do >= ?)
+            )) and typy_uzivatele.nazev ='technik' '''
+        arguments = [id_objednavka, datum, cas_od, cas_do, datum, cas_od, cas_do, datum, cas_od, cas_do]
+
+        return db.execute(sql, arguments).fetchall()
