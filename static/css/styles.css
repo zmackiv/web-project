@@ -345,6 +345,10 @@ button {
     justify-content: center;
 }
 
+button.obj_submit{
+    padding: 2px 6px;
+}
+
 @media screen and (max-width: 992px) {
     .side-by-side div {
         width: 40%;

@@ -37,15 +37,29 @@ def view_reservation_page1():
         future_orders = OrderService.get_future_user_orders(today_date, session.get('id_uzivatele'))
         return render_template("reservation.jinja", past_orders=past_orders, future_orders=future_orders)
 
-    if user_role == 'dispecer':
+    if user_role == 'dispecer' or user_role == 'admin':
+        form = forms.ObjednavkaForm(request.form)
         today_date = datetime.now().strftime('%Y-%m-%d')
         past_orders = OrderService.get_past_user_orders(today_date)
-        print(past_orders)
         future_conf_orders = OrderService.get_future_user_orders(today_date, conf=1)
         future_not_conf_orders = OrderService.get_future_user_orders(today_date, conf=0)
-        return render_template("reservation.jinja", past_orders=past_orders, future_conf_orders=future_conf_orders, future_not_conf_orders=future_not_conf_orders)
-    if user_role == 'admin':
-        return render_template("reservation.jinja")
+        order_id = (request.form.get('id_objednavka'))
+        if future_not_conf_orders:
+            for order in future_not_conf_orders:
+                id_objednavka = order['id_objednavka']
+                dostupni_technici = UserService.get_technik(id_objednavka)
+        else: dostupni_technici = []
+        #dostupni_technici =UserService.get_technik(future_not_conf_orders.id_objednavka)
+        form.technik.choices = [(item['id_uzivatele'], item['prijmeni']) for item in dostupni_technici]
+        if request.method == 'POST':
+            if 'obj_submit' in request.form:
+                OrderService.update_order(
+                    id_objednavka=order_id,
+                    technik=request.form['technik'],
+                    cena=request.form['cena'],
+            )
+            return redirect(url_for('view_reservation_page1'))
+        return render_template("reservation.jinja", form=form, dostupni_technici=dostupni_technici, past_orders=past_orders, future_conf_orders=future_conf_orders, future_not_conf_orders=future_not_conf_orders)
     if prihlasen == None:
         return render_template("reservation.jinja")
 

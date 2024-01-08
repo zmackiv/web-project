@@ -96,52 +96,62 @@
 
         {% if session['authenticated'] and (session['role']=='dispecer' or session['role']=='admin')%}
             <section>
-                    <h1>Nadcházející nepotvrzené objednávky</h1>
+                    <h1>Nadcházející nepotvrzené objednávky</h1><br>
                 <table>
                     <tr>
                         <th>ID</th>
                         <th>Datum, od-do</th>
                         <th>Stroj</th>
                         <th>Adresa doruceni</th>
-                        <th>Vzdalenost doruceni</th>
+                        <th>Klient</th>
+                        <th>Technik</th>
                         <th>Poznamka</th>
                         <th>Cena</th>
+                        <th>Potvrdit</th>
 
-                    </tr>
+                    </tr><form method='post'>
                     {% for order in future_not_conf_orders %}
                         <tr>
-                            <td>{{ order.id_objednavka }}</td>
-                            <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }}</td>
+                            <td><button type="submit" class=obj_submit name="id_objednavka" value="{{ order.id_objednavka }}">{{ order.id_objednavka }}</button></td>
+
+                            </form>
+                            <form method='post'>
+                            <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }} hod</td>
                             <td>{{ order.model }}</td>
                             <td>{{ order.adresa_doruceni }}</td>
-                            <td>{{ order.vzdalenost_doruceni }}</td>
+                            <td></td>
+                            {% if dostupni_technici != []%}
+                            <td>{{ render_field(form.technik, class="form-control") }}</td>
+                            {%else%}
+                            <td> Není k dispozici žádný technik</td>
+                            {%endif%}
                             <td>{{ order.poznamka }}</td>
-                            <td>{{ order.cena }}</td>
+                            <td>{{ render_field(form.cena, class="form-control") }}</td>
+                            <td><input type="hidden" name="id_objednavka" value="{{ order.id_objednavka }}">
+                            <button type="submit" class='obj_submit' name='obj_submit'>Ano</button></td>
                         </tr>
+
                     {% endfor %}
+                    </form>
                 </table>
                 <br><h1>Nadcházející potvrzené objednávky</h1>
                 <table>
                     <tr>
                         <th>ID</th>
-                        <th>Datum</th>
-                        <th>Cas od</th>
-                        <th>Cas do</th>
+                        <th>Datum, od-do</th>
                         <th>Adresa doruceni</th>
-                        <th>Vzdalenost doruceni</th>
                         <th>Poznamka</th>
                         <th>Stroj</th>
+                        <th>Cena</th>
                     </tr>
                     {% for order in future_conf_orders %}
                         <tr>
                             <td>{{ order.id_objednavka }}</td>
-                            <td>{{ order.datum }}</td>
-                            <td>{{ order.cas_od }}</td>
-                            <td>{{ order.cas_do }}</td>
+                            <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }} hod</td>
                             <td>{{ order.adresa_doruceni }}</td>
-                            <td>{{ order.vzdalenost_doruceni }}</td>
                             <td>{{ order.poznamka }}</td>
                             <td>{{ order.model }}</td>
+                            <td>{{ order.cena }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -149,25 +159,22 @@
                 <table>
                     <tr>
                         <th>ID</th>
-                        <th>Datum</th>
-                        <th>Cas od</th>
-                        <th>Cas do</th>
+                        <th>Datum, od-do</th>
                         <th>Adresa doruceni</th>
-                        <th>Vzdalenost doruceni</th>
                         <th>Poznamka</th>
                         <th>Stroj</th>
+                        <th>Cena</th>
                     </tr>
                     {% for order in past_orders %}
                         <tr>
                             <td>{{ order.id_objednavka }}</td>
-                            <td>{{ order.datum }}</td>
-                            <td>{{ order.cas_od }}</td>
-                            <td>{{ order.cas_do }}</td>
+                            <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }} hod</td>
                             <td>{{ order.adresa_doruceni }}</td>
-                            <td>{{ order.vzdalenost_doruceni }}</td>
                             <td>{{ order.poznamka }}</td>
                             <td>{{ order.model }}</td>
+                            <td>{{ order.cena }}</td>
                         </tr>
+
                     {% endfor %}
                 </table>
              </section>
