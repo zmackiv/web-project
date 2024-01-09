@@ -123,7 +123,11 @@ def view_account_page():
 # First endpoint
 @app.route("/my_account", methods=['GET', 'POST'])
 def view_my_account_page():
+    if not session.get('authenticated'):
+        return render_template("my_account.jinja")
+
     user_role = session.get('role')
+
     if user_role == 'klient':
         today_date = datetime.now().strftime('%Y-%m-%d')
         orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
