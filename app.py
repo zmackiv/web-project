@@ -156,10 +156,11 @@ def view_my_account_page():
             if akce == 'change_type':
                 novy_typ_uctu = request.form['novy_typ_uctu']
                 UserService.update_user_type(id_uzivatele, novy_typ_uctu)
-                return render_template("my_account.jinja", users=all_users)
+
             elif akce == 'delete':
                 UserService.delete_user(id_uzivatele)
-                return render_template("my_account.jinja", users=all_users)
+
+            return redirect(url_for('view_my_account_page'))
 
         return render_template("my_account.jinja", users=all_users)
 
