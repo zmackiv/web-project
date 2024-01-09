@@ -148,7 +148,8 @@ def view_my_account_page():
             flash('Stroj byl přidán')
         return render_template("my_account.jinja", new_product_form=new_product_form, typy_stroje=typy_stroje)
     if user_role == 'admin':
-        return render_template("my_account.jinja")
+        all_users = UserService.get_all_users()
+        return render_template("my_account.jinja", users = all_users)
 
 @app.route('/logout')
 def logout():

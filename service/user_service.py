@@ -66,3 +66,15 @@ class UserService():
         arguments = [id_objednavka, datum, cas_od, cas_do, datum, cas_od, cas_do, datum, cas_od, cas_do]
 
         return db.execute(sql, arguments).fetchall()
+
+    @staticmethod
+    def get_all_users():
+        db = get_db()
+
+        sql = '''
+                SELECT uzivatel.id_uzivatele, uzivatel.jmeno, uzivatel.prijmeni, uzivatel.email, uzivatel.cena_prace, typy_uzivatele.nazev AS typ_uctu
+                FROM uzivatel
+                INNER JOIN typy_uzivatele ON uzivatel.typy_uzivatele_id_typuzivatele = typy_uzivatele.id_typuzivatele;
+            '''
+
+        return db.execute(sql).fetchall()

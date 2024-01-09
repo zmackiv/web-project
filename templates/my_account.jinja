@@ -121,5 +121,50 @@
         </section>
     {% endif %}
 
+    {% if session['authenticated'] and session['role'] == 'admin' %}
+        <section>
+            <h2>Uživatelské účty:</h2>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>ID uživatele</th>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
+                    <th>email</th>
+                    <th>Cena práce</th>
+                    <th>Typ účtu</th>
+                    <th>Změna typu účtu:</th>
+                    <th>Smazání účtu</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id_uzivatele }}</td>
+                        <td>{{ user.jmeno }}</td>
+                        <td>{{ user.prijmeni }}</td>
+                        <td>{{ user.email }}</td>
+                        {% if user.cena_prace is none %}
+                        <td>Nezadáno</td>
+                        {%else%}
+                        <td>{{ user.cena_prace }}</td>
+                        {%endif%}
+                        <td>{{ user.typ_uctu }}</td>
+                        <td>
+                            <select name="novy_typ_uctu">
+                                <option value="admin">Admin</option>
+                                <option value="dispecer">Dispečer</option>
+                                <option value="klient">Klient</option>
+                                <option value="technik">Technik</option>
+
+                            </select>
+                            <br>
+                            <button type="submit">Změnit</button>
+                        </td>
+                        <td><button type="submit" class="red_button">Smazat účet</button></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        </section>
+    {% endif %}
 </main>
 {% endblock %}
