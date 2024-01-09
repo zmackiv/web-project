@@ -213,6 +213,19 @@ tr:nth-child(1){
     font-weight: bold;
 }
 
+@media screen and (min-width: 1000px) {
+  td {
+    white-space: normal;
+  }
+}
+
+
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; /* Zabraňte zalamování textu na více řádků */
+}
 
 
 /* --- NAVIGATION --- */

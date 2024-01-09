@@ -27,6 +27,7 @@
     {% if session['authenticated'] and session['role'] == 'klient' %}
         <section>
             <h2>Aktuální rezervace:</h2>
+        <div class="table-container">
             <table>
                 <tr>
                     <th>ID objednávky</th>
@@ -59,10 +60,12 @@
                     </tr>
                 {% endfor %}
             </table>
+        </div>
         </section>
 
         <section>
             <br><h2>Minulé rezervace:</h2>
+        <div class="table-container">
             <table>
                 <tr>
                     <th>ID objednávky</th>
@@ -95,6 +98,7 @@
                     </tr>
                 {% endfor %}
             </table>
+        </div>
         </section>
     {% endif %}
 

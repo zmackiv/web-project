@@ -42,6 +42,7 @@
             <section>
                     <p>Zde bude vypis prirazenych rezervaci technika.</p>
                     <h1>Nadcházející objednávky technika</h1><br>
+                <div class="table-container">
                 <table>
                     <tr>
                         <th>ID objednávky</th>
@@ -66,7 +67,9 @@
                         </tr>
                     {% endfor %}
                 </table>
+                </div>
                 <br><h1>Historické objednávky technika</h1><br>
+                <div class="table-container">
                 <table>
                     <tr>
                         <th>ID objednávky</th>
@@ -91,12 +94,14 @@
                         </tr>
                     {% endfor %}
                 </table>
+                </div>
              </section>
         {% endif %}
 
         {% if session['authenticated'] and (session['role']=='dispecer' or session['role']=='admin')%}
             <section>
                     <h1>Nadcházející nepotvrzené objednávky</h1><br>
+            <div class="table-container">
                 <table>
                     <tr>
                         <th>ID</th>
@@ -134,7 +139,9 @@
                     {% endfor %}
                     </form>
                 </table>
+            </div>
                 <br><h1>Nadcházející potvrzené objednávky</h1>
+            <div class="table-container">
                 <table>
                     <tr>
                         <th>ID</th>
@@ -155,7 +162,9 @@
                         </tr>
                     {% endfor %}
                 </table>
+            </div>
                 <br><h1>Historické objednávky</h1>
+            <div class="table-container">
                 <table>
                     <tr>
                         <th>ID</th>
@@ -177,6 +186,7 @@
 
                     {% endfor %}
                 </table>
+            </div>
              </section>
         {% endif %}
 
