@@ -85,3 +85,10 @@ class UserService():
         db.execute(' UPDATE uzivatel SET typy_uzivatele_id_typuzivatele = ? WHERE id_uzivatele = ?',
                     [novy_typ, id_uzivatele])
         db.commit()
+
+    def delete_user(id_uzivatele):
+        db = get_db()
+
+        db.execute('DELETE FROM uzivatel WHERE id_uzivatele = ?', [id_uzivatele])
+
+        db.commit()

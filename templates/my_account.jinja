@@ -158,11 +158,16 @@
 
                             </select>
                             <br>
-                            <button type="submit">Změnit</button>
+                            <button type="submit" name="action" value="change_type">Změnit</button>
                             <input type="hidden" name="id_uzivatele" value="{{ user.id_uzivatele }}">
                         </td>
                         </form>
-                        <td><button type="submit" class="red_button">Smazat účet</button></td>
+                        <form method="post">
+                        <td>
+                            <input type="hidden" name="id_uzivatele" value="{{ user.id_uzivatele }}">
+                            <button type="submit" name="action" value="delete" class="red_button">Smazat účet</button>
+                        </td>
+                        </form>
                     </tr>
                 {% endfor %}
             </table>
