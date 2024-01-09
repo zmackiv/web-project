@@ -20,6 +20,7 @@
         {% endif %}
 
         {% if session['authenticated'] and session['role']=='klient'%}
+            <p>Napište požadovaný čas v hodinách dle naší otevírací doby: po - pá: 8-17 hod.</p>
             <section class='side-by-side'>
                 <div>
                 <form method=post>
@@ -100,7 +101,38 @@
 
         {% if session['authenticated'] and (session['role']=='dispecer' or session['role']=='admin')%}
             <section>
-                    <h1>Nadcházející nepotvrzené objednávky</h1><br>
+                {% if zruseni_orders != [] %}
+                    <h1>Objednávky ke zrušení</h1><br>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Datum, od-do</th>
+                        <th>Stroj</th>
+                        <th>Klient</th>
+                        <th>Zrušit</th>
+                    </tr><form method='post'>
+                    {% for order in zruseni_orders %}
+                        <tr>
+                            <td><button type="submit" class=obj_submit name="id_objednavka" value="{{ order.id_objednavka }}">{{ order.id_objednavka }}</button></td>
+                            </form>
+                            <form method='post'>
+                            <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }} hod</td>
+                            <td>{{ order.model }}</td>
+                            <td></td>
+                            <td><input type="hidden" name="id_objednavka" value="{{ order.id_objednavka }}">
+                            <button type="submit" class='obj_submit' name='zrusit_submit'>Ano</button></td>
+                        </tr>
+
+                    {% endfor %}
+                    </form>
+                </table>
+            </div>
+            {%else%}
+            <p>- žádné objednávky nepotřebují zrušení</p>
+            {%endif%}
+
+                    <br><h1>Nadcházející nepotvrzené objednávky</h1><br>
             <div class="table-container">
                 <table>
                     <tr>
@@ -118,7 +150,6 @@
                     {% for order in future_not_conf_orders %}
                         <tr>
                             <td><button type="submit" class=obj_submit name="id_objednavka" value="{{ order.id_objednavka }}">{{ order.id_objednavka }}</button></td>
-
                             </form>
                             <form method='post'>
                             <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }} hod</td>
@@ -140,7 +171,7 @@
                     </form>
                 </table>
             </div>
-                <br><h1>Nadcházející potvrzené objednávky</h1>
+                <br><h1>Nadcházející potvrzené objednávky</h1><br>
             <div class="table-container">
                 <table>
                     <tr>
@@ -163,7 +194,7 @@
                     {% endfor %}
                 </table>
             </div>
-                <br><h1>Minulé objednávky</h1>
+                <br><h1>Minulé objednávky</h1><br>
             <div class="table-container">
                 <table>
                     <tr>

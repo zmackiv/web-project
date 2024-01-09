@@ -16,6 +16,7 @@ CREATE TABLE objednavka (
     poznamka            TEXT,
     cena                INTEGER NOT NULL,
     potvrzeni           CHAR(1) NOT NULL,
+    zruseni             CHAR(1) NOT NULL,
     stroj_id_stroj      INTEGER NOT NULL,
     FOREIGN KEY (stroj_id_stroj) REFERENCES stroj (id_stroj)
 );
@@ -59,9 +60,6 @@ CREATE TABLE uzivatel_objednavka (
     FOREIGN KEY (uzivatel_id_uzivatele) REFERENCES uzivatel (id_uzivatele)
 );
 
-ALTER TABLE objednavka
-ADD COLUMN uzivatel_id_uzivatele INTEGER REFERENCES uzivatel (id_uzivatele);
-
 INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (1, 'admin');
 INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (2, 'dispecer');
 INSERT INTO typy_uzivatele (id_typuzivatele, nazev) VALUES (3, 'klient');
@@ -80,8 +78,8 @@ INSERT INTO stroj (model, popis, hodinova_cena, cena_dopravy_km, foto, typy_stro
 INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (1, 'traktor');
 INSERT INTO typy_stroje(id_typstroje, nazev) VALUES (2, 'secí stroj');
 
-INSERT INTO objednavka (id_objednavka, timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, stroj_id_stroj)
-VALUES (5, '2024-01-07 14:30:00', '2024-01-07', 8, 12, 'Brno', '50', 'poznamka', 500, '1', 2);
+INSERT INTO objednavka (id_objednavka, timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, zruseni, stroj_id_stroj)
+VALUES (5, '2024-01-07 14:30:00', '2024-01-07', 8, 12, 'Brno', '50', 'poznamka', 500, '1', '0', 2);
 
 
 INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
@@ -90,8 +88,8 @@ VALUES (4, 5);
 INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
 VALUES (3, 5);
 
-INSERT INTO objednavka (id_objednavka, timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, stroj_id_stroj)
-VALUES (6, '2024-01-03 14:30:00', '2024-01-03', 8, 12, 'Brno', '50', 'poznamka', 500, '1', 1);
+INSERT INTO objednavka (id_objednavka, timestamp, datum, cas_od, cas_do, adresa_doruceni, vzdalenost_doruceni, poznamka, cena, potvrzeni, zruseni, stroj_id_stroj)
+VALUES (6, '2024-01-03 14:30:00', '2024-01-03', 8, 12, 'Brno', '50', 'poznamka', 500, '1', '0', 1);
 
 INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka)
 VALUES (3, 6);

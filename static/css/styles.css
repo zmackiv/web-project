@@ -345,7 +345,9 @@ main h2 {
     font-size: 0.9em;
 }
 
-
+select{
+    margin-bottom: 0.5em;
+}
 
 button {
     background: #78bc1b;
@@ -359,11 +361,12 @@ button {
 }
 
 button.obj_submit{
-    padding: 2px 6px;
+    padding: 3px 8px;
 }
 
 .red_button{
     background: red;
+    padding: 5px 10px;
 }
 
 @media screen and (max-width: 992px) {
