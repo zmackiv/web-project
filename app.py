@@ -113,7 +113,7 @@ def view_account_page():
                 request.form['password'],
             )
             flash('User inserted')
-            return redirect(url_for('view_my_account_page'))
+            return redirect(url_for('view_account_page'))
 
     if session.get('authenticated'):
         return redirect(url_for('view_my_account_page'))
