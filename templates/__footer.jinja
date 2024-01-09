@@ -1,14 +1,38 @@
 <footer>
-      <div>
-        <h3>Buďte s námi v kontaktu</h3>
-        <h4>Telefonní číslo: +420 123 456 789</h4>
-        <h4>Email: agrostroje@gmail.com</h4> <br>
+    <div>
+      <h3>Rychlé odkazy</h3>
+      <ul>
+        <li>
+            <a href="{{url_for('view_homepage')}}">Úvod</a>
+        </li>
+        <li>
+            <a href="{{url_for('view_reservation_page1')}}">Rezervace</a>
+        </li>
+        <li>
+          <a href="{{ url_for('view_contact_page') }}">Kontakt</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+    <h3>Kontakt</h3>
+    <address>
+        Agro stroje a.s.<br>
+        Zemědělská 335 <br>
+        Brno, 613 00
+    </address><br>
+    <p>Telefonní číslo: <br> +420 123 456 789</p>
+    <p>Email: <a href="mailto:info@agrostroje.cz">info@agrostroje.cz</a></p>
+</div>
 
-        <h5>Adresa:</h5>
-        <address>
-            Zemědělská 335 <br>
-            Brno, 613 00
-        </address>
-
-      </div>
+    <div>
+      <h3>Provozní doba</h3>
+        <p>Pondělí - 8:00 - 17:00 <br>
+            Úterý - 8:00 - 17:00 <br>
+            Středa - 8:00 - 17:00 <br>
+            Čtvrtek - 8:00 - 17:00 <br>
+            Pátek - 8:00 - 17:00 <br>
+            Sobota - 9:00 - 16:00 <br>
+            Neděle - 9:00 - 16:00<br>
+        </p>
+    </div>
 </footer>
