@@ -155,7 +155,11 @@
                             <td>{{ order.datum }}, {{ order.cas_od }}-{{ order.cas_do }} hod</td>
                             <td>{{ order.model }}</td>
                             <td>{{ order.adresa_doruceni }}</td>
-                            <td></td>
+                            <td>{% if klient and klient.get(order.id_objednavka) %}
+                            {{ klient[order.id_objednavka].jmeno }} {{ klient[order.id_objednavka].prijmeni }}
+                            {% else %}
+                            Klient není k dispozici
+                            {% endif %}</td>
                             {% if dostupni_technici != []%}
                             <td>{{ render_field(form.technik, class="form-control") }}</td>
                             {%else%}

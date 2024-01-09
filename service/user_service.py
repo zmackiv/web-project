@@ -79,6 +79,19 @@ class UserService():
 
         return db.execute(sql).fetchall()
 
+    @staticmethod
+    def get_klient(id_objednavka):
+        db = get_db()
+
+        sql = ''' SELECT * FROM uzivatel
+                 JOIN typy_uzivatele ON uzivatel.typy_uzivatele_id_typuzivatele = typy_uzivatele.id_typuzivatele
+                 JOIN uzivatel_objednavka ON uzivatel.id_uzivatele = uzivatel_objednavka.uzivatel_id_uzivatele
+                 JOIN objednavka ON uzivatel_objednavka.objednavka_id_objednavka = objednavka.id_objednavka
+                WHERE objednavka.id_objednavka = ? and typy_uzivatele.nazev = 'klient' '''
+        arguments = [id_objednavka]
+
+        return db.execute(sql, arguments).fetchone()
+
     def update_user_type(id_uzivatele, novy_typ):
         db = get_db()
 
