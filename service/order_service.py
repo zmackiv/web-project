@@ -19,7 +19,7 @@ class OrderService:
         return db.execute(sql, arguments).fetchall()
 
     @staticmethod
-    def insert_order(datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj, uzivatel_id_uzivatele, id_posledni):
+    def insert_order(datum, cas_od, cas_do, adresa_doruceni, poznamka, stroj, uzivatel_id_uzivatele):
         db = get_db()
         aktualni_cas = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         db.execute(
@@ -28,9 +28,10 @@ class OrderService:
         )
         db.commit()
 
+        id_posledni = db.execute('SELECT last_insert_rowid()').fetchone()[0]
         db.execute(
             'INSERT INTO uzivatel_objednavka (uzivatel_id_uzivatele, objednavka_id_objednavka) VALUES (?, ?)',
-            [uzivatel_id_uzivatele, id_posledni['MAX(id_objednavka)+1']]
+            [uzivatel_id_uzivatele, id_posledni]
         )
         db.commit()
 
@@ -97,11 +98,6 @@ class OrderService:
             arguments.append(zruseni)
 
         return db.execute(sql, arguments).fetchall()
-
-    def get_last_id():
-        db = get_db()
-        sql = '''SELECT MAX(id_objednavka)+1 FROM objednavka'''
-        return db.execute(sql).fetchone()
 
     def update_order(id_objednavka, technik, cena):
         db = get_db()
