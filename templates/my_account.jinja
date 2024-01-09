@@ -148,17 +148,20 @@
                         <td>{{ user.cena_prace }}</td>
                         {%endif%}
                         <td>{{ user.typ_uctu }}</td>
+                        <form method="post">
                         <td>
                             <select name="novy_typ_uctu">
-                                <option value="admin">Admin</option>
-                                <option value="dispecer">Dispečer</option>
-                                <option value="klient">Klient</option>
-                                <option value="technik">Technik</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Dispečer</option>
+                                <option value="3">Klient</option>
+                                <option value="4">Technik</option>
 
                             </select>
                             <br>
                             <button type="submit">Změnit</button>
+                            <input type="hidden" name="id_uzivatele" value="{{ user.id_uzivatele }}">
                         </td>
+                        </form>
                         <td><button type="submit" class="red_button">Smazat účet</button></td>
                     </tr>
                 {% endfor %}

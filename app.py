@@ -149,7 +149,12 @@ def view_my_account_page():
         return render_template("my_account.jinja", new_product_form=new_product_form, typy_stroje=typy_stroje)
     if user_role == 'admin':
         all_users = UserService.get_all_users()
-        return render_template("my_account.jinja", users = all_users)
+        if request.method == 'POST':
+            novy_typ_uctu = request.form['novy_typ_uctu']
+            id_uzivatele = request.form['id_uzivatele']
+            UserService.update_user_type(id_uzivatele, novy_typ_uctu)
+            return render_template("my_account.jinja", users=all_users)
+        return render_template("my_account.jinja", users=all_users)
 
 @app.route('/logout')
 def logout():

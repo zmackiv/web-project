@@ -78,3 +78,10 @@ class UserService():
             '''
 
         return db.execute(sql).fetchall()
+
+    def update_user_type(id_uzivatele, novy_typ):
+        db = get_db()
+
+        db.execute(' UPDATE uzivatel SET typy_uzivatele_id_typuzivatele = ? WHERE id_uzivatele = ?',
+                    [novy_typ, id_uzivatele])
+        db.commit()
