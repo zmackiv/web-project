@@ -150,6 +150,7 @@
                         <td>{{ user.typ_uctu }}</td>
                         <form method="post">
                         <td>
+                            {% if user.id_uzivatele != session['id_uzivatele'] and user.id_uzivatele != 1 %}
                             <select name="novy_typ_uctu">
                                 <option value="1">Admin</option>
                                 <option value="2">Dispečer</option>
@@ -160,12 +161,15 @@
                             <br>
                             <button type="submit" name="action" value="change_type">Změnit</button>
                             <input type="hidden" name="id_uzivatele" value="{{ user.id_uzivatele }}">
+                            {% endif %}
                         </td>
                         </form>
                         <form method="post">
                         <td>
+                            {% if user.id_uzivatele != session['id_uzivatele'] and user.id_uzivatele != 1 %}
                             <input type="hidden" name="id_uzivatele" value="{{ user.id_uzivatele }}">
                             <button type="submit" name="action" value="delete" class="red_button">Smazat účet</button>
+                            {% endif %}
                         </td>
                         </form>
                     </tr>
