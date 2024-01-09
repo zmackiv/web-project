@@ -40,9 +40,10 @@
                     <th>Cena</th>
                     <th>Stroj</th>
                     <th>Potvrzeno</th>
+                    <th>Žádost o zrušení</th>
                 </tr>
                 {% for order in future_orders %}
-                    <tr>
+                    <tr><form method=post>
                         <td>{{ order.id_objednavka }}</td>
                         <td>{{ order.datum }}</td>
                         <td>{{ order.cas_od }}</td>
@@ -57,6 +58,14 @@
                         {%else%}
                         <td>Ne</td>
                         {%endif%}
+                        {% if order.zruseni == '1' %}
+                            <td>Čeká se na zpracování</td>
+                        {% else %}
+                            <td><input type="hidden" name="id_objednavka" value="{{ order.id_objednavka }}">
+                            <button type="submit" name="delete" value="delete" class="red_button">Zrušit</button>
+                            </td>
+                        {%endif%}
+                        </form>
                     </tr>
                 {% endfor %}
             </table>
@@ -159,7 +168,7 @@
 
                             </select>
                             <br>
-                            <button type="submit" name="action" value="change_type">Změnit</button>
+                            <button type="submit" class="obj_submit" name="action" value="change_type">Změnit</button>
                             <input type="hidden" name="id_uzivatele" value="{{ user.id_uzivatele }}">
                             {% endif %}
                         </td>

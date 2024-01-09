@@ -43,13 +43,13 @@ def view_reservation_page1():
         past_orders = OrderService.get_past_user_orders(today_date)
         future_conf_orders = OrderService.get_future_user_orders(today_date, conf=1)
         future_not_conf_orders = OrderService.get_future_user_orders(today_date, conf=0)
+        zruseni_orders = OrderService.get_future_user_orders(today_date, zruseni=1)
         order_id = (request.form.get('id_objednavka'))
         if future_not_conf_orders:
             for order in future_not_conf_orders:
                 id_objednavka = order['id_objednavka']
                 dostupni_technici = UserService.get_technik(id_objednavka)
         else: dostupni_technici = []
-        #dostupni_technici =UserService.get_technik(future_not_conf_orders.id_objednavka)
         form.technik.choices = [(item['id_uzivatele'], item['prijmeni']) for item in dostupni_technici]
         if request.method == 'POST':
             if 'obj_submit' in request.form:
@@ -58,8 +58,11 @@ def view_reservation_page1():
                     technik=request.form['technik'],
                     cena=request.form['cena'],
             )
+                return redirect(url_for('view_reservation_page1'))
+            elif 'zrusit_submit' in request.form:
+                OrderService.delete_order(order_id)
             return redirect(url_for('view_reservation_page1'))
-        return render_template("reservation.jinja", form=form, dostupni_technici=dostupni_technici, past_orders=past_orders, future_conf_orders=future_conf_orders, future_not_conf_orders=future_not_conf_orders)
+        return render_template("reservation.jinja", form=form, dostupni_technici=dostupni_technici, past_orders=past_orders, future_conf_orders=future_conf_orders, future_not_conf_orders=future_not_conf_orders, zruseni_orders=zruseni_orders)
     if prihlasen == None:
         return render_template("reservation.jinja")
 
@@ -133,6 +136,11 @@ def view_my_account_page():
         orders = OrderService.get_all_user_orders(session.get('id_uzivatele'))
         past_orders = OrderService.get_past_user_orders(today_date, session.get('id_uzivatele') )
         future_orders = OrderService.get_future_user_orders(today_date, session.get( 'id_uzivatele') )
+        if request.method == 'POST':
+            id_objednavka = request.form['id_objednavka']
+            if 'delete' in request.form:
+                OrderService.update_zruseni_order(id_objednavka)
+            return redirect(url_for('view_my_account_page'))
         return render_template("my_account.jinja", past_orders=past_orders, future_orders=future_orders)
     if user_role == 'technik':
         return render_template("my_account.jinja")
