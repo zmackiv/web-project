@@ -1,4 +1,5 @@
 from wtforms import Form, IntegerField, StringField, SelectField, PasswordField, validators
+from datetime import datetime, timedelta
 
 class SignInForm(Form):
     email = StringField(name='email', label='Email', validators=[validators.Length(min=3, max=50), validators.InputRequired(), validators.Email()])
@@ -37,8 +38,20 @@ class ReservationForm1(Form):
         if not super().validate():
             return False
 
+        # Validace času
         if self.cas_od.data >= self.cas_do.data:
             self.cas_od.errors.append("Čas od musí být menší než čas do.")
+            return False
+
+        # Validace data
+        try:
+            entered_date = datetime.strptime(self.datum.data, '%Y-%m-%d').date()
+            tomorrow_date = datetime.now().date() + timedelta(days=1)
+            if entered_date < tomorrow_date:
+                self.datum.errors.append("Datum musí být zítřejší nebo pozdější.")
+                return False
+        except ValueError:
+            self.datum.errors.append("Nesprávný formát data.")
             return False
 
         return True
