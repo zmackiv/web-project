@@ -23,10 +23,25 @@ class ReservationForm1(Form):
     datum = StringField(name='datum', label='Datum',
                        validators=[validators.Length(min=3, max=20), validators.InputRequired()])
     cas_od = IntegerField(name='cas_od', label='Čas od',
-                          validators=[validators.Length(min=1, max=10), validators.InputRequired()])
+                          validators=[
+                              validators.NumberRange(min=8, max=16, message="Čas musí být mezi 8 a 17"),
+                              validators.InputRequired()
+                          ])
     cas_do = IntegerField(name='cas_do', label='Čas do',
-                        validators=[validators.Length(min=1, max=10), validators.InputRequired()])
+                          validators=[
+                              validators.NumberRange(min=9, max=17, message="Čas musí být mezi 8 a 17"),
+                              validators.InputRequired()
+                          ])
 
+    def validate(self):
+        if not super().validate():
+            return False
+
+        if self.cas_od.data >= self.cas_do.data:
+            self.cas_od.errors.append("Čas od musí být menší než čas do.")
+            return False
+
+        return True
 
 class ReservationForm2(Form):
     adresa = StringField(name='adresa', label='',

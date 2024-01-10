@@ -25,7 +25,7 @@ def view_reservation_page1():
     prihlasen = session.get('authenticated')
     if user_role == 'klient':
         form = forms.ReservationForm1(request.form)
-        if request.method == 'POST':
+        if request.method == 'POST' and form.validate():
             session['cas_od'] = request.form['cas_od']
             session['cas_do'] = request.form['cas_do']
             session['datum'] = request.form['datum']
