@@ -14,7 +14,7 @@
 
         {% if 'authenticated' not in session %}
             <p>Pro rezervaci budete muset provést přihlášení nebo se zaregistrovat.</p>
-            <a href="{{ url_for("view_account_page") }}">
+            <a href="{{ url_for("accountpage.view_account_page") }}">
                 <button type="button">Přihlásit / Registrovat</button>
             </a>
         {% endif %}
@@ -34,7 +34,7 @@
                   <input type="text" id="datepicker" name="datepicker" class="form-control" placeholder="Vyberte datum">
                   <input type="hidden" id="datum" name="datum">
                   </dl><br><br><br><br><br><br><br><br><br><br><br><br>
-                  <a href="{{ url_for("view_reservation_page2") }}">
+                  <a href="{{ url_for("reservation2.view_reservation_page2") }}">
                 <button type="submit">Další strana</button>
                 </a>
                 </form>
