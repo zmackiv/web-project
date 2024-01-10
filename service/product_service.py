@@ -33,3 +33,21 @@ class ProductService:
             [model, popis, hod_cena, doprava, foto, typy_stroje]
         )
         db.commit()
+    @staticmethod
+    def delete_product(id_stroj):
+        db = get_db()
+
+        db.execute('DELETE FROM stroj WHERE id_stroj = ?', [id_stroj])
+
+        db.commit()
+    @staticmethod
+    def get_all_stroj_typ():
+        db = get_db()
+
+        sql = '''
+            SELECT stroj.*, typy_stroje.nazev AS nazev_typu_stroje
+            FROM stroj
+            INNER JOIN typy_stroje ON stroj.typy_stroje_id_typstroje = typy_stroje.id_typstroje;
+            '''
+
+        return db.execute(sql).fetchall()

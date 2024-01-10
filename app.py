@@ -148,17 +148,29 @@ def view_my_account_page():
         new_product_form = forms.AddProductForm(request.form)
         typy_stroje = CategoryService.get_all()
         new_product_form.typy_stroje.choices = [(item['id_typstroje'], item['nazev']) for item in typy_stroje]
+
+        stroje = ProductService.get_all_stroj_typ()
+
         if request.method == 'POST':
-            ProductService.insert_product(
-                model=request.form['model'],
-                popis=request.form['popis'],
-                hod_cena=request.form['hod_cena'],
-                doprava=request.form['doprava'],
-                foto=request.form['foto'],
-                typy_stroje=request.form['typy_stroje'],
-            )
-            flash('Stroj byl přidán')
-        return render_template("my_account.jinja", new_product_form=new_product_form, typy_stroje=typy_stroje)
+            akce = request.form['action']
+
+            if akce == 'add':
+                ProductService.insert_product(
+                    model=request.form['model'],
+                    popis=request.form['popis'],
+                    hod_cena=request.form['hod_cena'],
+                    doprava=request.form['doprava'],
+                    foto=request.form['foto'],
+                    typy_stroje=request.form['typy_stroje'],
+                )
+                flash('Stroj byl přidán')
+            if akce == 'delete':
+                id_stroj = request.form['id_stroj']
+                ProductService.delete_product(id_stroj)
+
+            return redirect(url_for('view_my_account_page'))
+
+        return render_template("my_account.jinja", new_product_form=new_product_form, typy_stroje=typy_stroje, stroje=stroje)
     if user_role == 'admin':
         all_users = UserService.get_all_users()
         if request.method == 'POST':

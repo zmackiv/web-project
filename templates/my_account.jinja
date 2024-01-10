@@ -124,9 +124,41 @@
               {{ render_field(new_product_form.foto, class="form-control") }}
               {{ render_field(new_product_form.typy_stroje, class="form-control") }}
             </dl><br>
-            <button type="submit">Přidat</button>
+            <button type="submit" name="action" value="add">Přidat</button>
             </form>
             </div>
+        </section>
+        <section>
+            <h2>Stroje:</h2>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>ID stroje</th>
+                    <th>Model</th>
+                    <th>Popis</th>
+                    <th>Hodinová cena</th>
+                    <th>Cena dopravy za km</th>
+                    <th>Typ stroje</th>
+                    <th>Smazání stroje</th>
+                </tr>
+                {% for stroj in stroje %}
+                    <tr>
+                        <td>{{ stroj.id_stroj }}</td>
+                        <td>{{ stroj.model }}</td>
+                        <td>{{ stroj.popis }}</td>
+                        <td>{{ stroj.hodinova_cena }}</td>
+                        <td>{{ stroj.cena_dopravy_km }}</td>
+                        <td>{{ stroj.nazev_typu_stroje }}</td>
+                        <form method="post">
+                        <td>
+                            <button type="submit" name="action" value="delete" class="red_button">Smazat stroj</button>
+                            <input type="hidden" name="id_stroj" value="{{ stroj.id_stroj }}">
+                        </td>
+                        </form>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
         </section>
     {% endif %}
 
