@@ -71,7 +71,6 @@ def view_reservation_page1():
 @app.route("/reservation2-2", methods=['GET', 'POST'])
 def view_reservation_page2():
     form = forms.ReservationForm2(request.form)
-    id_posledni= OrderService.get_last_id()
     dostupne_stroje = ProductService.get_dostupne(session['datum'], session['cas_od'], session['cas_do'])
     form.stroj.choices = [(item['id_stroj'], item['model']) for item in dostupne_stroje]
     if request.method == 'POST':
