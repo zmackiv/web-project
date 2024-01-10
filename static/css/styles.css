@@ -176,6 +176,9 @@ input[type="button"] {
         right: 1em;
         padding: 1em;
     }
+    .side-by-side-stroj div{
+        width: 45%;
+    }
 }
 
 @media screen and (max-width: 576px) {
